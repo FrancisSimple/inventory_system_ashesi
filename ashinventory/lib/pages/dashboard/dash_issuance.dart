@@ -48,7 +48,9 @@ class _DashIssuancesState extends State<DashIssuances> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredRequests = data
         .where(
-          (element) => element["receipient"].toLowerCase().contains(widget.searchQuery.text.toLowerCase()) ,
+          (element) => element["receipient"]
+              .toLowerCase()
+              .contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
     return Scaffold(
@@ -62,7 +64,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                 data: DataTableThemeData(
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   horizontalMargin: 120,
                   headingRowColor: WidgetStateProperty.all(
                       Theme.of(context).colorScheme.secondaryContainer),
@@ -75,10 +77,12 @@ class _DashIssuancesState extends State<DashIssuances> {
                 child: PaginatedDataTable(
                   // primary: true,
                   // controller: hScrollController,
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   showCheckboxColumn: false,
-                  rowsPerPage: _rowsPerPage,
+                  rowsPerPage:
+                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
                   columnSpacing: 16,
+                  showEmptyRows: false,
 
                   columns: const [
                     DataColumn(

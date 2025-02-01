@@ -69,7 +69,9 @@ class _DashItemsState extends State<DashItems> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredRequests = data
         .where(
-          (element) => element["name"].toLowerCase().contains(widget.searchQuery.text.toLowerCase()) ,
+          (element) => element["name"]
+              .toLowerCase()
+              .contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
     return Scaffold(
@@ -83,8 +85,9 @@ class _DashItemsState extends State<DashItems> {
                 data: DataTableThemeData(
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   horizontalMargin: 120,
+                  dataRowMinHeight: 0,
                   headingRowColor: WidgetStateProperty.all(
                       Theme.of(context).colorScheme.secondaryContainer),
                   dataRowColor: WidgetStateProperty.all(
@@ -96,10 +99,12 @@ class _DashItemsState extends State<DashItems> {
                 child: PaginatedDataTable(
                   // primary: true,
                   // controller: hScrollController,
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   showCheckboxColumn: false,
-                  rowsPerPage: _rowsPerPage,
-                  columnSpacing: 16,
+                  rowsPerPage:
+                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
+                  columnSpacing: 16, 
+                  showEmptyRows: false,
 
                   columns: const [
                     DataColumn(
@@ -190,7 +195,8 @@ class FixMeDataSource extends DataTableSource {
             constraints: BoxConstraints(
               minWidth: 0.15 * MediaQuery.sizeOf(context).width,
             ),
-            child:Text(request['name'], overflow: TextOverflow.ellipsis),),
+            child: Text(request['name'], overflow: TextOverflow.ellipsis),
+          ),
         ),
         DataCell(
           Text(request["stockNumber"].toString()),
@@ -216,7 +222,7 @@ class FixMeDataSource extends DataTableSource {
             constraints: BoxConstraints(
               minWidth: 0.15 * MediaQuery.sizeOf(context).width,
             ),
-            child:Text(request['storageLocation'],
+            child: Text(request['storageLocation'],
                 overflow: TextOverflow.ellipsis),
           ),
         ),

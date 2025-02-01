@@ -86,7 +86,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                 data: DataTableThemeData(
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   horizontalMargin: 120,
                   headingRowColor: WidgetStateProperty.all(
                       Theme.of(context).colorScheme.secondaryContainer),
@@ -99,10 +99,11 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                 child: PaginatedDataTable(
                   // primary: true,
                   // controller: hScrollController,
-                  dataRowMaxHeight: double.infinity,
+                  // dataRowMaxHeight: double.maxFinite,
                   showCheckboxColumn: false,
-                  rowsPerPage: _rowsPerPage,
-                  columnSpacing: 16,
+                  rowsPerPage:
+                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
+                  columnSpacing: 16, showEmptyRows: false,
 
                   columns: const [
                     DataColumn(
