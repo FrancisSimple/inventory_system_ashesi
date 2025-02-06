@@ -55,13 +55,14 @@ class _HomePageState extends State<HomePage> {
   ];
   bool addDept = false;
   TextEditingController addDeptController = TextEditingController();
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    addDeptController.dispose();
-    super.dispose();
-  }
+  final _formKey = GlobalKey<FormState>();
+  final _formKeyDrawer = GlobalKey<FormState>();
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   addDeptController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -141,10 +142,22 @@ class _HomePageState extends State<HomePage> {
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        child: FormTextField(
+                                        child: Form(
+                                          key: _formKey,
+                                          child: FormTextField(
                                             isDense: true,
                                             controller: addDeptController,
-                                            labelText: "Add department"),
+                                            labelText: "Department name",
+                                            validator: (value) {
+                                              // debugPrint(value.toString());
+                                              if (value == null ||
+                                                  value == "") {
+                                                return "*Required";
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 16,
@@ -165,20 +178,25 @@ class _HomePageState extends State<HomePage> {
 
                                           // color: Theme.of(context).colorScheme.onPrimary,
                                           onPressed: () {
-                                            setState(() {
-                                              addDept = !addDept;
-                                              sideNavItems.add(
-                                                {
-                                                  "name":
-                                                      addDeptController.text,
-                                                  "page": DeptsPage(
-                                                    title:
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              debugPrint(
+                                                  addDeptController.text);
+                                              setState(() {
+                                                addDept = !addDept;
+                                                sideNavItems.add(
+                                                  {
+                                                    "name":
                                                         addDeptController.text,
-                                                  ),
-                                                },
-                                              );
-                                              addDeptController.clear();
-                                            });
+                                                    "page": DeptsPage(
+                                                      title: addDeptController
+                                                          .text,
+                                                    ),
+                                                  },
+                                                );
+                                                addDeptController.clear();
+                                              });
+                                            }
                                           },
                                           child: Icon(
                                             Icons.check,
@@ -207,7 +225,8 @@ class _HomePageState extends State<HomePage> {
                                     callDialog(
                                       context: context,
                                       content: Container(
-                                        width: 0.5*MediaQuery.sizeOf(context).width,
+                                        width: 0.5 *
+                                            MediaQuery.sizeOf(context).width,
                                         child: Text(
                                             "Removing this department will remove all data associated with it."),
                                       ),
@@ -266,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                             text: "Dashboard",
                             isActive: selectedTab == null,
                             onPressed: () {
-                              Navigator.pop(context);
+                              // Navigator.pop(context);
                               setState(() {
                                 selectedTab = null;
                                 // debugPrint("working");
@@ -310,10 +329,22 @@ class _HomePageState extends State<HomePage> {
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        child: FormTextField(
+                                        child: Form(
+                                          key: _formKey,
+                                          child: FormTextField(
                                             isDense: true,
                                             controller: addDeptController,
-                                            labelText: "Add department"),
+                                            labelText: "Department name",
+                                            validator: (value) {
+                                              // debugPrint(value.toString());
+                                              if (value == null ||
+                                                  value == "") {
+                                                return "*Required";
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 16,
@@ -334,20 +365,25 @@ class _HomePageState extends State<HomePage> {
 
                                           // color: Theme.of(context).colorScheme.onPrimary,
                                           onPressed: () {
-                                            setState(() {
-                                              addDept = !addDept;
-                                              sideNavItems.add(
-                                                {
-                                                  "name":
-                                                      addDeptController.text,
-                                                  "page": DeptsPage(
-                                                    title:
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              debugPrint(
+                                                  addDeptController.text);
+                                              setState(() {
+                                                addDept = !addDept;
+                                                sideNavItems.add(
+                                                  {
+                                                    "name":
                                                         addDeptController.text,
-                                                  ),
-                                                },
-                                              );
-                                              addDeptController.clear();
-                                            });
+                                                    "page": DeptsPage(
+                                                      title: addDeptController
+                                                          .text,
+                                                    ),
+                                                  },
+                                                );
+                                                addDeptController.clear();
+                                              });
+                                            }
                                           },
                                           child: Icon(
                                             Icons.check,
@@ -367,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                                   sub: true,
                                   isActive: selectedTab == index,
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    // Navigator.pop(context);
                                     setState(() {
                                       selectedTab = index;
                                     });

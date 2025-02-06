@@ -28,8 +28,9 @@ class _DashHomePageState extends State<DashboardPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize:(MediaQuery.sizeOf(context).width > 760)
-          ? const Size.fromHeight(212):Size.fromHeight(156),
+          preferredSize: (MediaQuery.sizeOf(context).width > 760)
+              ? const Size.fromHeight(212)
+              : Size.fromHeight(156),
           child: Container(
             // color: const Color(0xFFFFF1F1),
             child: Column(
@@ -76,7 +77,14 @@ class _DashHomePageState extends State<DashboardPage>
                       ),
                       Expanded(child: SizedBox()),
                       // Month Selector
-                      MonthSelector(),
+                      SizedBox(
+                          width: 280,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              MonthSelector(),
+                            ],
+                          )),
                     ],
                   ),
                 ),

@@ -49,7 +49,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                   .contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
-        debugPrint(MediaQuery.sizeOf(context).width.toString());
+        // debugPrint(MediaQuery.sizeOf(context).width.toString());
     return Scaffold(
       body: SingleChildScrollView(
         // color: Colors.amber,

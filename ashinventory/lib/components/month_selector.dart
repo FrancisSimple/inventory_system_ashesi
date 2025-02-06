@@ -37,7 +37,7 @@ class _MonthSelectorState extends State<MonthSelector> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(selectedDate.toString());
+    // debugPrint(selectedDate.toString());
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
