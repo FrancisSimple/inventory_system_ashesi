@@ -1,4 +1,6 @@
 // import 'dart:math';
+import 'package:ashinventory/components/text_field.dart';
+import 'package:ashinventory/services/callback.dart';
 import 'package:flutter/material.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
@@ -165,7 +167,110 @@ class _DashPurchasesState extends State<DashPurchases> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          TextEditingController itemName = TextEditingController();
+          TextEditingController unitPrice = TextEditingController();
+          TextEditingController invoiceNumber = TextEditingController();
+          TextEditingController quantity = TextEditingController();
+          // TextEditingController link = TextEditingController();
+          String? selectedDepartment;
+          List<String> departments = [
+            "Engineering",
+            "Hostels",
+            "Health Center",
+            "I.T.",
+            "Business",
+            "Library",
+          ];
+
+          callDialog(
+              context: context,
+              content: SizedBox(
+                width: 500,
+                child: Form(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Item details",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    FormTextField(
+                      controller: itemName,
+                      // hintText: "Item name",
+                      labelText: "Item name",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: FormTextField(
+                            controller: unitPrice,
+                            // hintText: "Item name",
+                            labelText: "Unit price (GHS)",
+                            filled: true,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: FormTextField(
+                            controller: quantity,
+                            // maxLines: 5,
+                            // minLines: 3,
+                            // hintText: "Item name",
+                            labelText: "Quantity",
+                            filled: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                    // SizedBox(height: 16),
+                    SizedBox(height: 16),
+                    FormTextField(
+                      controller: invoiceNumber,
+                      // maxLines: 5,
+                      // minLines: 3,
+                      // hintText: "Item name",
+                      labelText: "Invoice number",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      "Supplier details",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    FormTextField(
+                      controller: itemName,
+                      // hintText: "Item name",
+                      labelText: "Supplier name",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
+                    FormTextField(
+                      controller: itemName,
+                      // hintText: "Item name",
+                      labelText: "Supplier contact",
+                      filled: true,
+                    )
+                  ],
+                )),
+              ),
+              title: "Record a purchase",
+              confirmText: "Confirm",
+              onConfirm: () {});
+        },
         label: const Text("Add purchase"),
         icon: const Icon(Icons.add),
       ),

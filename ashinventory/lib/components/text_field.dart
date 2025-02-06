@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 class FormTextField extends StatefulWidget {
   final TextEditingController controller;
-  final String hintText;
+  final String? hintText;
   final Widget? prefixIcon;
   final bool hassuffixIcon;
   bool obscureText;
@@ -13,7 +13,11 @@ class FormTextField extends StatefulWidget {
   void Function(String value)? onChanged;
   FormFieldValidator<String>? validator;
   int? maxLength;
+  int? maxLines;
+  int? minLines;
   final bool filled;
+  final bool isDense;
+  final String? labelText;
   List<TextInputFormatter>? inputFormatters;
   final Color? filledColor;
 
@@ -21,16 +25,20 @@ class FormTextField extends StatefulWidget {
     super.key,
     required this.controller,
     this.obscureText = false,
-    required this.hintText,
+    this.hintText,
     this.onChanged,
     this.prefixIcon,
     this.hassuffixIcon = false,
     this.keyboardType,
     this.validator,
     this.maxLength,
+    this.maxLines = 1,
+    this.minLines,
     this.inputFormatters,
     this.filled = false,
+    this.isDense = false,
     this.filledColor,
+    this.labelText,
   });
 
   @override
@@ -45,17 +53,23 @@ class _FormTextFieldState extends State<FormTextField> {
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      textAlignVertical: TextAlignVertical.top,
       controller: widget.controller,
       validator: widget.validator,
+      
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
-        // labelText: "Password",
+        alignLabelWithHint: true,
+        labelText: widget.labelText,
         filled: widget.filled,
         fillColor: widget.filledColor,
         hintText: widget.hintText,
+        isDense: widget.isDense,
         // filled: true,
         counter: const SizedBox(
           height: 0,

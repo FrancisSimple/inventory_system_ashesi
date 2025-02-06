@@ -6,6 +6,8 @@ class SideNavButton extends StatelessWidget {
   final String text;
   final Widget? icon;
   final bool sub;
+  final Color? buttonColor;
+  // final Color? iconColor;
   final bool hasIcon;
   final bool isActive;
   final void Function()? onPressed;
@@ -20,6 +22,8 @@ class SideNavButton extends StatelessWidget {
     required this.onPressed,
     this.onIconPressed,
     this.icon,
+    this.buttonColor,
+    // this.iconColor,
   });
 
   @override
@@ -59,9 +63,10 @@ class SideNavButton extends StatelessWidget {
                       : Theme.of(context).colorScheme.onPrimary,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
-                  color: sub
-                      ? Theme.of(context).colorScheme.inversePrimary
-                      : Theme.of(context).colorScheme.primary,
+                  color: buttonColor ??
+                      (sub
+                          ? Theme.of(context).colorScheme.inversePrimary
+                          : Theme.of(context).colorScheme.primary),
 
                   // color: Theme.of(context).colorScheme.onPrimary,
                   onPressed: onIconPressed,
@@ -69,6 +74,7 @@ class SideNavButton extends StatelessWidget {
                       Icon(
                         sub ? Icons.remove : Icons.add,
                         size: 16,
+                        
                       ),
                 ),
               )

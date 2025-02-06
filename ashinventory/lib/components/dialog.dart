@@ -45,7 +45,7 @@ class PopupDialog extends StatelessWidget {
                       child: Text(
                         cancelText ?? "Cancel",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.tertiaryContainer
+                          color: Theme.of(context).colorScheme.error
                         ),
                       ),
                     )
@@ -53,6 +53,7 @@ class PopupDialog extends StatelessWidget {
               showCancel
                   ? SmoothButton(
                       onPressed: onConfirm,
+                      
                       text: confirmText ?? "Confirm",
                     )
                   : const SizedBox(),

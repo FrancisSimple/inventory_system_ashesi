@@ -2,6 +2,8 @@ import 'package:ashinventory/components/button.dart';
 import 'package:ashinventory/components/text_field.dart';
 import 'package:ashinventory/pages/dashboard/dash_home.dart';
 import 'package:ashinventory/pages/dept/dept_home.dart';
+import 'package:ashinventory/post.dart';
+import 'package:ashinventory/services/callback.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,6 +57,13 @@ class _HomePageState extends State<HomePage> {
   TextEditingController addDeptController = TextEditingController();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    addDeptController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -99,8 +108,19 @@ class _HomePageState extends State<HomePage> {
                             text: "Departments",
                             // sub: false,
                             hasIcon: true,
-
+                            icon: addDept
+                                ? Icon(
+                                    Icons.close,
+                                    size: 16,
+                                    color:
+                                        Theme.of(context).colorScheme.onError,
+                                  )
+                                : null,
                             onPressed: null,
+                            buttonColor: addDept
+                                ? Theme.of(context).colorScheme.error
+                                : null,
+
                             onIconPressed: () {
                               setState(() {
                                 addDept = !addDept;
@@ -113,30 +133,62 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 8),
                           Column(
                             children: [
-                              // ConstrainedBox(
-                              //   child: Row(
-                              //     children: [
-                              //       FormTextField(
-                              //           controller: addDeptController,
-                              //           hintText: "Add a department"),
-                              //       MaterialButton(
-                              //         textColor:
-                              //             Theme.of(context).colorScheme.onPrimary,
-                              //         shape: RoundedRectangleBorder(
-                              //             borderRadius: BorderRadius.circular(4)),
-                              //         color:
-                              //             Theme.of(context).colorScheme.primary,
-                                
-                              //         // color: Theme.of(context).colorScheme.onPrimary,
-                              //         onPressed: () {},
-                              //         child: Icon(
-                              //           Icons.check,
-                              //           size: 16,
-                              //         ),
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
+                              if (addDept)
+                                Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(24, 2, 16, 8),
+                                  height: addDept ? null : 0,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: FormTextField(
+                                            isDense: true,
+                                            controller: addDeptController,
+                                            labelText: "Add department"),
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Container(
+                                        width: 32,
+                                        height: 24,
+                                        child: MaterialButton(
+                                          textColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+
+                                          // color: Theme.of(context).colorScheme.onPrimary,
+                                          onPressed: () {
+                                            setState(() {
+                                              addDept = !addDept;
+                                              sideNavItems.add(
+                                                {
+                                                  "name":
+                                                      addDeptController.text,
+                                                  "page": DeptsPage(
+                                                    title:
+                                                        addDeptController.text,
+                                                  ),
+                                                },
+                                              );
+                                              addDeptController.clear();
+                                            });
+                                          },
+                                          child: Icon(
+                                            Icons.check,
+                                            size: 16,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
@@ -151,7 +203,24 @@ class _HomePageState extends State<HomePage> {
                                       selectedTab = index;
                                     });
                                   },
-                                  onIconPressed: () {},
+                                  onIconPressed: () {
+                                    callDialog(
+                                      context: context,
+                                      content: Container(
+                                        width: 0.5*MediaQuery.sizeOf(context).width,
+                                        child: Text(
+                                            "Removing this department will remove all data associated with it."),
+                                      ),
+                                      title:
+                                          "Remove ${sideNavItems[index]["name"]}?",
+                                      onConfirm: () {
+                                        setState(() {
+                                          sideNavItems.removeAt(index);
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
                             ],
@@ -197,6 +266,7 @@ class _HomePageState extends State<HomePage> {
                             text: "Dashboard",
                             isActive: selectedTab == null,
                             onPressed: () {
+                              Navigator.pop(context);
                               setState(() {
                                 selectedTab = null;
                                 // debugPrint("working");
@@ -207,31 +277,121 @@ class _HomePageState extends State<HomePage> {
                             text: "Departments",
                             // sub: false,
                             hasIcon: true,
-
+                            icon: addDept
+                                ? Icon(
+                                    Icons.close,
+                                    size: 16,
+                                    color:
+                                        Theme.of(context).colorScheme.onError,
+                                  )
+                                : null,
                             onPressed: null,
-                            onIconPressed: () {},
+                            buttonColor: addDept
+                                ? Theme.of(context).colorScheme.error
+                                : null,
+
+                            onIconPressed: () {
+                              setState(() {
+                                addDept = !addDept;
+                              });
+                            },
                           ),
                           Divider(
                             height: 1,
                           ),
                           SizedBox(height: 8),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: sideNavItems.length,
-                            itemBuilder: (context, index) => SideNavButton(
-                              text: sideNavItems[index]["name"],
-                              sub: true,
-                              isActive: selectedTab == index,
-                              onPressed: () {
-                                setState(() {
-                                  selectedTab = index;
-                                });
-                              },
-                              onIconPressed: () {},
-                            ),
+                          Column(
+                            children: [
+                              if (addDept)
+                                Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(24, 2, 16, 8),
+                                  height: addDept ? null : 0,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: FormTextField(
+                                            isDense: true,
+                                            controller: addDeptController,
+                                            labelText: "Add department"),
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Container(
+                                        width: 32,
+                                        height: 24,
+                                        child: MaterialButton(
+                                          textColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+
+                                          // color: Theme.of(context).colorScheme.onPrimary,
+                                          onPressed: () {
+                                            setState(() {
+                                              addDept = !addDept;
+                                              sideNavItems.add(
+                                                {
+                                                  "name":
+                                                      addDeptController.text,
+                                                  "page": DeptsPage(
+                                                    title:
+                                                        addDeptController.text,
+                                                  ),
+                                                },
+                                              );
+                                              addDeptController.clear();
+                                            });
+                                          },
+                                          child: Icon(
+                                            Icons.check,
+                                            size: 16,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: sideNavItems.length,
+                                itemBuilder: (context, index) => SideNavButton(
+                                  text: sideNavItems[index]["name"],
+                                  sub: true,
+                                  isActive: selectedTab == index,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      selectedTab = index;
+                                    });
+                                  },
+                                  onIconPressed: () {
+                                    callDialog(
+                                      context: context,
+                                      content: Text(
+                                          "Removing this department will remove all data associated with it."),
+                                      title:
+                                          "Delete ${sideNavItems[index]["name"]} department?",
+                                      onConfirm: () {
+                                        setState(() {
+                                          sideNavItems.removeAt(index);
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 100,
                           )
                         ],

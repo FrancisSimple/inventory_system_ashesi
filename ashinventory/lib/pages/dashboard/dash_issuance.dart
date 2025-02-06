@@ -1,4 +1,6 @@
 // import 'dart:math';
+import 'package:ashinventory/components/text_field.dart';
+import 'package:ashinventory/services/callback.dart';
 import 'package:flutter/material.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
@@ -136,9 +138,110 @@ class _DashIssuancesState extends State<DashIssuances> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: const Text("Add issuance"),
+        label: const Text("Issue item"),
         icon: const Icon(Icons.add),
+        onPressed: () {
+          TextEditingController itemName = TextEditingController();
+          TextEditingController itemNumber = TextEditingController();
+          TextEditingController note = TextEditingController();
+          // TextEditingController link = TextEditingController();
+          String? selectedDepartment;
+          List<String> departments = [
+            "Engineering",
+            "Hostels",
+            "Health Center",
+            "I.T.",
+            "Business",
+            "Library",
+          ];
+
+          callDialog(
+              context: context,
+              content: SizedBox(
+                width: 500,
+                child: Form(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FormTextField(
+                      controller: itemName,
+                      // hintText: "Item name",
+                      labelText: "Item name",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: DropdownButtonFormField<String>(
+                            value: selectedDepartment,
+                            items: departments.map((country) {
+                              return DropdownMenuItem(
+                                  value: country, child: Text(country));
+                            }).toList(),
+                            validator: (value) {
+                              // debugPrint(value.toString());
+                              if (value == null) {
+                                return "Department";
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                // selectedDepartment = value;
+                                // selectedTown = null;
+                                // selectedLocality = null;
+                              });
+                            },
+                            // decoration: const InputDecoration(),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(
+                              labelText: 'Department',
+                              filled: true,
+                              counter: const SizedBox(
+                                height: 0,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            // style: TextStyle(
+                            //   color: Theme.of(context).colorScheme.primary,
+                            // ),
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: FormTextField(
+                            controller: itemNumber,
+                            labelText: "Item number",
+                            hintText: "No of items",
+                            filled: true,
+                            keyboardType: TextInputType.number,
+                            // filledColor: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    FormTextField(
+                      controller: note,
+                      maxLines: 5,
+                      minLines: 3,
+                      // hintText: "Item name",
+                      labelText: "Note",
+                      filled: true,
+                    ),
+                  ],
+                )),
+              ),
+              title: "Issue an item",
+              confirmText: "Issue item",
+              onConfirm: () {});
+        },
       ),
     );
   }
