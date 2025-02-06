@@ -36,11 +36,12 @@ class _DashHomePageState extends State<DeptsPage>
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: (MediaQuery.sizeOf(context).width > 760)
-          ?const Size.fromHeight(236):const Size.fromHeight(180),
+              ? const Size.fromHeight(236)
+              : const Size.fromHeight(180),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const SizedBox(
+              const SizedBox(
                 height: 56,
                 // child:  (MediaQuery.sizeOf(context).width < 760)?Padding(
                 //   padding:
@@ -59,8 +60,7 @@ class _DashHomePageState extends State<DeptsPage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.title,
-                            style:
-                                Theme.of(context).textTheme.headlineMedium),
+                            style: Theme.of(context).textTheme.headlineMedium),
                         Text("${widget.title} supplies",
                             style: Theme.of(context)
                                 .textTheme
@@ -117,8 +117,7 @@ class _DashHomePageState extends State<DeptsPage>
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.bold)),
                             Text("Ewurabena",
-                                style:
-                                    Theme.of(context).textTheme.bodyMedium),
+                                style: Theme.of(context).textTheme.bodyMedium),
                           ],
                         ),
                         // Contact
@@ -131,8 +130,7 @@ class _DashHomePageState extends State<DeptsPage>
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.bold)),
                             Text("0245157898",
-                                style:
-                                    Theme.of(context).textTheme.bodyMedium),
+                                style: Theme.of(context).textTheme.bodyMedium),
                           ],
                         ),
                       ],
@@ -159,7 +157,15 @@ class _DashHomePageState extends State<DeptsPage>
                       ),
                     Expanded(child: SizedBox()),
                     // Month Selector
-                    MonthSelector(),
+                    SizedBox(
+                      width: 280,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MonthSelector(),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
