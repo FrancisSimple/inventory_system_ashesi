@@ -1,4 +1,5 @@
 import 'package:ashinventory/components/button.dart';
+import 'package:ashinventory/components/empty_screen.dart';
 import 'package:ashinventory/components/text_field.dart';
 import 'package:ashinventory/pages/dashboard/dash_home.dart';
 import 'package:ashinventory/pages/dept/dept_home.dart';
@@ -207,7 +208,10 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                              ListView.builder(
+                              sideNavItems.isEmpty? const MiniEmptyScreen(
+                              title: "No departments available",  
+                              subtitle: "Click the '+' button to add a new department",
+                            )  : ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: sideNavItems.length,
@@ -235,6 +239,7 @@ class _HomePageState extends State<HomePage> {
                                       onConfirm: () {
                                         setState(() {
                                           sideNavItems.removeAt(index);
+                                          selectedTab = null;
                                         });
                                         Navigator.pop(context);
                                       },
@@ -394,7 +399,10 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                              ListView.builder(
+                            sideNavItems.isEmpty?MiniEmptyScreen(
+                              title: "No departments available",  
+                              subtitle: "Click the '+' button to add a new department",
+                            )  :ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: sideNavItems.length,
@@ -418,6 +426,7 @@ class _HomePageState extends State<HomePage> {
                                       onConfirm: () {
                                         setState(() {
                                           sideNavItems.removeAt(index);
+                                          selectedTab = null;
                                         });
                                         Navigator.pop(context);
                                       },

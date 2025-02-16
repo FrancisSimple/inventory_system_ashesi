@@ -25,6 +25,13 @@ class _DashHomePageState extends State<DashboardPage>
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
@@ -82,19 +89,31 @@ class _DashHomePageState extends State<DashboardPage>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              MonthSelector(),
+                              MonthSelector(
+                                onDateChanged: (date) => setState(
+                                  () {
+                                    debugPrint(date.toString());
+                                  },
+                                ),
+                              ),
                             ],
                           )),
                     ],
                   ),
                 ),
                 // Tabs
-                TabBar(controller: tabController, tabs: const [
-                  Tab(text: "Items"),
-                  Tab(text: "Issuances"),
-                  Tab(text: "Opening Stock"),
-                  Tab(text: "Purchases"),
-                ])
+                TabBar(
+                  controller: tabController,
+                  tabs: const [
+                    Tab(text: "Items"),
+                    Tab(text: "Issuances"),
+                    Tab(text: "Opening Stock"),
+                    Tab(text: "Purchases"),
+                  ],
+                  onTap: (value) {
+                    searchController.clear();
+                  },
+                )
               ],
             ),
             // const SizedBox(height: 10),

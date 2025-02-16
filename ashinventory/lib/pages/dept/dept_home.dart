@@ -162,7 +162,11 @@ class _DashHomePageState extends State<DeptsPage>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          MonthSelector(),
+                          MonthSelector(
+                            onDateChanged: (date) => setState(() {
+                              debugPrint(date.toString());
+                            }),
+                          ),
                         ],
                       ),
                     ),
@@ -170,12 +174,18 @@ class _DashHomePageState extends State<DeptsPage>
                 ),
               ),
               // Tabs
-              TabBar(controller: tabController, tabs: const [
-                Tab(text: "Items"),
-                Tab(text: "Issuances"),
-                Tab(text: "Opening Stock"),
-                Tab(text: "Purchases"),
-              ])
+              TabBar(
+                controller: tabController,
+                tabs: const [
+                  Tab(text: "Items"),
+                  Tab(text: "Issuances"),
+                  Tab(text: "Opening Stock"),
+                  Tab(text: "Purchases"),
+                ],
+                onTap: (value) {
+                  searchController.clear();
+                },
+              )
             ],
           ),
         ),

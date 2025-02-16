@@ -1,4 +1,5 @@
 // import 'dart:math';
+import 'package:ashinventory/components/empty_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
@@ -21,27 +22,60 @@ class _DashOpStockState extends State<DashOpStock> {
   // final hScrollController = ScrollController();
   final int _rowsPerPage = 10;
   final List<Map<String, dynamic>> data = [
-    {
-      "itemName": "A4 Sheets",
-      // "date": DateTime.now().subtract(const Duration(days: 1)),
-      // "receipient": "Receipient",
-      "unitPriceGHS": 100,
-      "quantity": 1,
-      "totalCostGHS": 100,
-      "totalCostUSD": 1562,
-      "note": "Paid in full",
-    },
-  ];
+  {
+    "itemName": "A4 Sheets",
+    "unitPriceGHS": 100,
+    "quantity": 10,
+    "totalCostGHS": 1000,
+    "totalCostUSD": 15620,
+    "note": "Initial stock",
+  },
+  {
+    "itemName": "Pens (Blue)",
+    "unitPriceGHS": 5,
+    "quantity": 50,
+    "totalCostGHS": 250,
+    "totalCostUSD": 3905,
+    "note": "Opening balance",
+  },
+  {
+    "itemName": "Staplers",
+    "unitPriceGHS": 25,
+    "quantity": 20,
+    "totalCostGHS": 500,
+    "totalCostUSD": 7810,
+    "note": "Office supplies",
+  },
+  {
+    "itemName": "Printer Ink",
+    "unitPriceGHS": 200,
+    "quantity": 5,
+    "totalCostGHS": 1000,
+    "totalCostUSD": 15620,
+    "note": "For printing",
+  },
+  {
+    "itemName": "Notebooks",
+    "unitPriceGHS": 15,
+    "quantity": 30,
+    "totalCostGHS": 450,
+    "totalCostUSD": 7030,
+    "note": "For distribution",
+  },
+];
+
 
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredRequests = data
         .where(
-          (element) => element["itemName"].toLowerCase().contains(widget.searchQuery.text.toLowerCase()) ,
+          (element) => element["itemName"].toLowerCase().contains(widget.searchQuery.text.toLowerCase())|| element["note"].toLowerCase().contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
     return Scaffold(
-      body: SingleChildScrollView(
+      body:filteredRequests.isEmpty? const EmptyScreen(
+        title: 'No Results',
+      ): SingleChildScrollView(
         // color: Colors.amber,
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -86,7 +120,9 @@ class _DashOpStockState extends State<DashOpStock> {
                   // dataRowMaxHeight: double.maxFinite,
                   showCheckboxColumn: false,
                   rowsPerPage:
-                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
+                      filteredRequests.length < _rowsPerPage
+                            ? filteredRequests.length
+                            : _rowsPerPage,
                   columnSpacing: 16, showEmptyRows: false,
 
                   columns: const [

@@ -1,6 +1,9 @@
 // import 'dart:math';
+import 'package:ashinventory/components/empty_screen.dart';
 import 'package:ashinventory/components/text_field.dart';
+import 'package:ashinventory/pages/details/items.dart';
 import 'package:ashinventory/services/callback.dart';
+import 'package:ashinventory/services/transitions.dart';
 import 'package:flutter/material.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
@@ -25,46 +28,193 @@ class _DashItemsState extends State<DashItems> {
 
   final List<Map<String, dynamic>> data = [
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "ENVELOPE ENO SERWAH WHITE",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 564,
+      "storageLocation": "Main Store",
     },
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "WHITE BOARD MARKERS BLACK",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 461,
+      "storageLocation": "Main Store",
     },
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "PEN BLUE",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 284,
+      "storageLocation": "Main Store",
     },
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "PEN RED",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 130,
+      "storageLocation": "Main Store",
     },
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "FLIP CHART",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 24,
+      "storageLocation": "Main Store",
     },
     {
-      "name": "A4 Sheets",
-      "lastUpdated": DateTime.now().subtract(const Duration(days: 1)),
-      "link": "Engineering",
-      "stockNumber": 10,
-      "storageLocation": "Engineering Building",
+      "name": "EXERCISE BOOK NOTE 1 PP COVER",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 20,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "WHITE BOARD CLEANER/DUSTER",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 34,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "PERMANENT MARKER",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 22,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "STAPLE PINS ZSZYWKI",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 13,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "MASKING CELLOTAPE ENO SERWAA WHITE",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 7,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "PENCIL HB DELO (61ACK LEAD)",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 98,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "STICKY NOTE",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 54,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "CLEAR BAG",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 38,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "LONG RULER",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 14,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "STICK UP",
+      "lastUpdated": DateTime(2024, 11, 25),
+      "link": "Facilities & Logistics",
+      "stockNumber": 3,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "HP TONER W2410A (216A) BLACK",
+      "lastUpdated": DateTime(2024, 12, 9),
+      "link": "Facilities & Logistics",
+      "stockNumber": 2,
+      "storageLocation": "Library",
+    },
+    {
+      "name": "SHORTHAND NOTEBOOK 70 SHEETS",
+      "lastUpdated": DateTime(2024, 12, 9),
+      "link": "Facilities & Logistics",
+      "stockNumber": 84,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "PAPER CLIPS",
+      "lastUpdated": DateTime(2024, 12, 9),
+      "link": "Facilities & Logistics",
+      "stockNumber": 24,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "BLU TACK",
+      "lastUpdated": DateTime(2024, 12, 9),
+      "link": "Facilities & Logistics",
+      "stockNumber": 11,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "HP LASERJET TONER (CF289A)",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 1,
+      "storageLocation": "Administration Block",
+    },
+    {
+      "name": "BINDING COVER",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 682,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "SHEET PROTECTOR",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 584,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "ENVELOPE ENO SERWAH A5 BROWN",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 208,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "PEN BLACK",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 100,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "HP LASERJET TONER (CF244A)",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 1,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "HP LASERJET TONER (CF280A)",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 1,
+      "storageLocation": "Main Store",
+    },
+    {
+      "name": "HP LASERJET TONER (CF287A)",
+      "lastUpdated": DateTime(2024, 11, 21),
+      "link": "Facilities & Logistics",
+      "stockNumber": 1,
+      "storageLocation": "Main Store",
     },
   ];
 
@@ -72,94 +222,103 @@ class _DashItemsState extends State<DashItems> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredRequests = data
         .where(
-          (element) => element["name"]
-              .toLowerCase()
-              .contains(widget.searchQuery.text.toLowerCase()),
+          (element) =>
+              element["name"]
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase()) ||
+              element["storageLocation"]
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
     return Scaffold(
-      body: SingleChildScrollView(
-        // color: Colors.amber,
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            SelectionArea(
-              child: DataTableTheme(
-                data: DataTableThemeData(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                  // dataRowMaxHeight: double.maxFinite,
-                  horizontalMargin: 120,
-                  dataRowMinHeight: 0,
-                  headingRowColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.secondaryContainer),
-                  dataRowColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.surfaceContainerLow),
-                  headingTextStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary),
-                ),
-                child: PaginatedDataTable(
-                  // primary: true,
-                  // controller: hScrollController,
-                  // dataRowMaxHeight: double.maxFinite,
-                  showCheckboxColumn: false,
-                  rowsPerPage:
-                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
-                  columnSpacing: 16,
-                  showEmptyRows: false,
+      body: filteredRequests.isEmpty
+          ? const EmptyScreen(
+              title: 'No Results',
+            )
+          : SingleChildScrollView(
+              // color: Colors.amber,
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SelectionArea(
+                    child: DataTableTheme(
+                      data: DataTableThemeData(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16)),
+                        // dataRowMaxHeight: double.maxFinite,
+                        horizontalMargin: 120,
+                        dataRowMinHeight: 0,
+                        headingRowColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.secondaryContainer),
+                        dataRowColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.surfaceContainerLow),
+                        headingTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      child: PaginatedDataTable(
+                        // primary: true,
+                        // controller: hScrollController,
+                        // dataRowMaxHeight: double.maxFinite,
+                        showCheckboxColumn: false,
+                        rowsPerPage: filteredRequests.length < _rowsPerPage
+                            ? filteredRequests.length
+                            : _rowsPerPage,
+                        columnSpacing: 16,
+                        showEmptyRows: false,
 
-                  columns: const [
-                    DataColumn(
-                      label: Text('Name'),
-                      // onSort: (columnIndex, _) {
-                      //   setState(() {
-                      //     fixMeRequests
-                      //         .sort((a, b) => a['name'].compareTo(b['name']));
-                      //   });
-                      // },
-                    ),
-                    DataColumn(
-                      label: Text('Stock number'),
-                    ),
-                    DataColumn(
-                      label: Text('Link'),
-                    ),
-                    DataColumn(
-                      label: Text('Last updated'),
-                      // onSort: (columnIndex, _) {
-                      //   setState(() {
-                      //     fixMeRequests.sort((a, b) =>
-                      //         a['lastUpdated'].compareTo(b['lastUpdated']));
-                      //   });
-                      // },
-                    ),
-                    DataColumn(
-                      label: Text('Storage location'),
-                    ),
-                    DataColumn(
-                      label: Text('Actions'),
-                    ),
-                  ],
-                  source: FixMeDataSource(filteredRequests, context),
+                        columns: const [
+                          DataColumn(
+                            label: Text('Name'),
+                            // onSort: (columnIndex, _) {
+                            //   setState(() {
+                            //     fixMeRequests
+                            //         .sort((a, b) => a['name'].compareTo(b['name']));
+                            //   });
+                            // },
+                          ),
+                          DataColumn(
+                            label: Text('Quantity'),
+                          ),
+                          DataColumn(
+                            label: Text('Link'),
+                          ),
+                          DataColumn(
+                            label: Text('Last updated'),
+                            // onSort: (columnIndex, _) {
+                            //   setState(() {
+                            //     fixMeRequests.sort((a, b) =>
+                            //         a['lastUpdated'].compareTo(b['lastUpdated']));
+                            //   });
+                            // },
+                          ),
+                          DataColumn(
+                            label: Text('Storage location'),
+                          ),
+                          DataColumn(
+                            label: Text('Actions'),
+                          ),
+                        ],
+                        source: FixMeDataSource(filteredRequests, context),
 
-                  // header: const Text(
-                  //   'Your Requests',
-                  //   style: TextStyle(fontWeight: FontWeight.bold),
-                  // ),
-                  // availableRowsPerPage: const [5, 6, 7, 8, 9, 10],
-                  // onRowsPerPageChanged: (value) {
-                  //   setState(() {
-                  //     _rowsPerPage = value ?? 5;
-                  //   });
-                  // },
-                ),
+                        // header: const Text(
+                        //   'Your Requests',
+                        //   style: TextStyle(fontWeight: FontWeight.bold),
+                        // ),
+                        // availableRowsPerPage: const [5, 6, 7, 8, 9, 10],
+                        // onRowsPerPageChanged: (value) {
+                        //   setState(() {
+                        //     _rowsPerPage = value ?? 5;
+                        //   });
+                        // },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 72)
+                ],
               ),
             ),
-            const SizedBox(height: 72)
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           TextEditingController itemName = TextEditingController();
@@ -216,7 +375,8 @@ class _DashItemsState extends State<DashItems> {
                               });
                             },
                             // decoration: const InputDecoration(),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(
                               labelText: 'Department',
                               filled: true,
@@ -236,7 +396,7 @@ class _DashItemsState extends State<DashItems> {
                         Expanded(
                           child: FormTextField(
                             controller: stockNumber,
-                            labelText: "Stock available",
+                            labelText: "Quantity",
                             filled: true,
                             keyboardType: TextInputType.number,
                             // filledColor: true,
@@ -249,9 +409,7 @@ class _DashItemsState extends State<DashItems> {
               ),
               title: "Add an item",
               confirmText: "Add item",
-              onConfirm: () {
-
-              });
+              onConfirm: () {});
         },
         label: const Text("Add item"),
         icon: const Icon(Icons.add),
@@ -329,7 +487,110 @@ class FixMeDataSource extends DataTableSource {
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    TextEditingController itemName = TextEditingController();
+                    TextEditingController itemNumber = TextEditingController();
+                    TextEditingController note = TextEditingController();
+                    // TextEditingController link = TextEditingController();
+                    String? selectedDepartment;
+                    List<String> departments = [
+                      "Engineering",
+                      "Hostels",
+                      "Health Center",
+                      "I.T.",
+                      "Business",
+                      "Library",
+                    ];
+
+                    callDialog(
+                        context: context,
+                        content: SizedBox(
+                          width: 500,
+                          child: Form(
+                              child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FormTextField(
+                                controller: itemName,
+                                // hintText: "Item name",
+                                labelText: "Item name",
+                                filled: true,
+                              ),
+                              SizedBox(height: 16),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: DropdownButtonFormField<String>(
+                                      value: selectedDepartment,
+                                      items: departments.map((country) {
+                                        return DropdownMenuItem(
+                                            value: country,
+                                            child: Text(country));
+                                      }).toList(),
+                                      validator: (value) {
+                                        // debugPrint(value.toString());
+                                        if (value == null) {
+                                          return "Department";
+                                        }
+                                        return null;
+                                      },
+                                      onChanged: (value) {
+                                        // setState(() {
+                                        // selectedDepartment = value;
+                                        // selectedTown = null;
+                                        // selectedLocality = null;
+                                        // });
+                                      },
+                                      // decoration: const InputDecoration(),
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      decoration: InputDecoration(
+                                        labelText: 'Department',
+                                        filled: true,
+                                        counter: const SizedBox(
+                                          height: 0,
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                      ),
+                                      // style: TextStyle(
+                                      //   color: Theme.of(context).colorScheme.primary,
+                                      // ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8),
+                                  Expanded(
+                                    child: FormTextField(
+                                      controller: itemNumber,
+                                      labelText: "Quantity",
+                                      hintText: "No of items",
+                                      filled: true,
+                                      keyboardType: TextInputType.number,
+                                      // filledColor: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 16),
+                              FormTextField(
+                                controller: note,
+                                maxLines: 5,
+                                minLines: 3,
+                                // hintText: "Item name",
+                                labelText: "Note",
+                                filled: true,
+                              ),
+                            ],
+                          )),
+                        ),
+                        title: "Issue an item",
+                        confirmText: "Issue item",
+                        onConfirm: () {});
+                  },
                   child: const Text("Issue"),
                 ),
                 SizedBox(width: 8),
@@ -337,7 +598,111 @@ class FixMeDataSource extends DataTableSource {
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    TextEditingController itemName = TextEditingController();
+                    TextEditingController unitPrice = TextEditingController();
+                    TextEditingController invoiceNumber =
+                        TextEditingController();
+                    TextEditingController quantity = TextEditingController();
+                    // TextEditingController link = TextEditingController();
+                    String? selectedDepartment;
+                    List<String> departments = [
+                      "Engineering",
+                      "Hostels",
+                      "Health Center",
+                      "I.T.",
+                      "Business",
+                      "Library",
+                    ];
+
+                    callDialog(
+                        context: context,
+                        content: SizedBox(
+                          width: 500,
+                          child: Form(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Item details",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 8),
+                              FormTextField(
+                                controller: itemName,
+                                // hintText: "Item name",
+                                labelText: "Item name",
+                                filled: true,
+                              ),
+                              SizedBox(height: 16),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: FormTextField(
+                                      controller: unitPrice,
+                                      // hintText: "Item name",
+                                      labelText: "Unit price (GHS)",
+                                      filled: true,
+                                    ),
+                                  ),
+                                  SizedBox(width: 8),
+                                  Expanded(
+                                    child: FormTextField(
+                                      controller: quantity,
+                                      // maxLines: 5,
+                                      // minLines: 3,
+                                      // hintText: "Item name",
+                                      labelText: "Quantity",
+                                      filled: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // SizedBox(height: 16),
+                              SizedBox(height: 16),
+                              FormTextField(
+                                controller: invoiceNumber,
+                                // maxLines: 5,
+                                // minLines: 3,
+                                // hintText: "Item name",
+                                labelText: "Invoice number",
+                                filled: true,
+                              ),
+                              SizedBox(height: 16),
+                              Text(
+                                "Supplier details",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 8),
+                              FormTextField(
+                                controller: itemName,
+                                // hintText: "Item name",
+                                labelText: "Supplier name",
+                                filled: true,
+                              ),
+                              SizedBox(height: 16),
+                              FormTextField(
+                                controller: itemName,
+                                // hintText: "Item name",
+                                labelText: "Supplier contact",
+                                filled: true,
+                              )
+                            ],
+                          )),
+                        ),
+                        title: "Record a purchase",
+                        confirmText: "Confirm",
+                        onConfirm: () {});
+                  },
                   child: const Text("Stock"),
                 ),
                 SizedBox(width: 8),
@@ -345,7 +710,14 @@ class FixMeDataSource extends DataTableSource {
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      slideLeftTransition(
+                        ItemDetailsPage(itemDetails: request),
+                      ),
+                    );
+                  },
                   child: const Text("View"),
                 ),
               ],

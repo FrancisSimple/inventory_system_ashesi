@@ -1,6 +1,10 @@
 // import 'dart:math';
+import 'package:ashinventory/components/empty_screen.dart';
 import 'package:ashinventory/components/text_field.dart';
+import 'package:ashinventory/pages/details/issuances.dart';
+import 'package:ashinventory/pages/details/items.dart';
 import 'package:ashinventory/services/callback.dart';
+import 'package:ashinventory/services/transitions.dart';
 import 'package:flutter/material.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
@@ -23,120 +27,152 @@ class _DashIssuancesState extends State<DashIssuances> {
   // final hScrollController = ScrollController();
   final int _rowsPerPage = 10;
   final List<Map<String, dynamic>> data = [
-    {
-      "department": "Engineering",
-      "date": DateTime.now().subtract(const Duration(days: 1)),
-      "receipient": "Receipient",
-      "itemNumber": 10,
-      "Note": "To be returned",
-    },
-    {
-      "department": "Engineering",
-      "date": DateTime.now().subtract(const Duration(days: 1)),
-      "receipient": "Receipient",
-      "itemNumber": 10,
-      "Note": "To be returned",
-    },
-    {
-      "department": "Engineering",
-      "date": DateTime.now().subtract(const Duration(days: 1)),
-      "receipient": "Receipient",
-      "itemNumber": 10,
-      "Note": "To be returned",
-    },
-  ];
+  {
+    "department": "Engineering",
+    "date": DateTime.now().subtract(const Duration(days: 1)),
+    "recipient": "John Doe",
+    "itemNumber": 5,
+    "itemName": "A4 Sheets",
+    "note": "To be returned",
+  },
+  {
+    "department": "I.T.",
+    "date": DateTime.now().subtract(const Duration(days: 3)),
+    "recipient": "Jane Smith",
+    "itemNumber": 2,
+    "itemName": "Oscilloscope",
+    "note": "Permanent allocation",
+  },
+  {
+    "department": "Library",
+    "date": DateTime.now().subtract(const Duration(days: 7)),
+    "recipient": "Michael Brown",
+    "itemNumber": 10,
+    "itemName": "Projector",
+    "note": "For seminar use",
+  },
+  {
+    "department": "Business",
+    "date": DateTime.now().subtract(const Duration(days: 2)),
+    "recipient": "Emily White",
+    "itemNumber": 3,
+    "itemName": "Calculator",
+    "note": "To be shared among staff",
+  },
+  {
+    "department": "Health Center",
+    "date": DateTime.now().subtract(const Duration(days: 4)),
+    "recipient": "Dr. Alex Green",
+    "itemNumber": 1,
+    "itemName": "First Aid Kit",
+    "note": "For emergency cases",
+  },
+];
 
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> filteredRequests = data
         .where(
-          (element) => element["receipient"]
-              .toLowerCase()
-              .contains(widget.searchQuery.text.toLowerCase()),
+          (element) =>
+              element["recipient"]
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase()) ||
+              element["note"]
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase()),
         )
         .toList();
     return Scaffold(
-      body: SingleChildScrollView(
-        // color: Colors.amber,
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            SelectionArea(
-              child: DataTableTheme(
-                data: DataTableThemeData(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                  // dataRowMaxHeight: double.maxFinite,
-                  horizontalMargin: 120,
-                  headingRowColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.secondaryContainer),
-                  dataRowColor: WidgetStateProperty.all(
-                      Theme.of(context).colorScheme.surfaceContainerLow),
-                  headingTextStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary),
-                ),
-                child: PaginatedDataTable(
-                  // primary: true,
-                  // controller: hScrollController,
-                  // dataRowMaxHeight: double.maxFinite,
-                  showCheckboxColumn: false,
-                  rowsPerPage:
-                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
-                  columnSpacing: 16,
-                  showEmptyRows: false,
+      body: filteredRequests.isEmpty
+          ? const EmptyScreen(
+              title: 'No Results',
+            )
+          : SingleChildScrollView(
+              // color: Colors.amber,
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SelectionArea(
+                    child: DataTableTheme(
+                      data: DataTableThemeData(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16)),
+                        // dataRowMaxHeight: double.maxFinite,
+                        horizontalMargin: 120,
+                        headingRowColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.secondaryContainer),
+                        dataRowColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.surfaceContainerLow),
+                        headingTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      child: PaginatedDataTable(
+                        // primary: true,
+                        // controller: hScrollController,
+                        // dataRowMaxHeight: double.maxFinite,
+                        showCheckboxColumn: false,
+                        rowsPerPage: filteredRequests.length < _rowsPerPage
+                            ? filteredRequests.length
+                            : _rowsPerPage,
+                        columnSpacing: 16,
+                        showEmptyRows: false,
 
-                  columns: const [
-                    DataColumn(
-                      label: Text('Date'),
-                      // onSort: (columnIndex, _) {
-                      //   setState(() {
-                      //     fixMeRequests
-                      //         .sort((a, b) => a['department'].compareTo(b['department']));
-                      //   });
-                      // },
-                    ),
-                    DataColumn(
-                      label: Text('Department'),
-                    ),
-                    DataColumn(
-                      label: Text('Receipient'),
-                    ),
-                    DataColumn(
-                      label: Text('Item number'),
-                      // onSort: (columnIndex, _) {
-                      //   setState(() {
-                      //     fixMeRequests.sort((a, b) =>
-                      //         a['date'].compareTo(b['date']));
-                      //   });
-                      // },
-                    ),
-                    DataColumn(
-                      label: Text('Note'),
-                    ),
-                    DataColumn(
-                      label: Text('Actions'),
-                    ),
-                  ],
-                  source: FixMeDataSource(filteredRequests, context),
+                        columns: const [
+                          DataColumn(
+                            label: Text('Date'),
+                            // onSort: (columnIndex, _) {
+                            //   setState(() {
+                            //     fixMeRequests
+                            //         .sort((a, b) => a['department'].compareTo(b['department']));
+                            //   });
+                            // },
+                          ),
+                          DataColumn(
+                            label: Text('Department'),
+                          ),
+                          
+                           DataColumn(
+                            label: Text('Item name'),
+                          ),
+                          DataColumn(
+                            label: Text('Quantity'),
+                            // onSort: (columnIndex, _) {
+                            //   setState(() {
+                            //     fixMeRequests.sort((a, b) =>
+                            //         a['date'].compareTo(b['date']));
+                            //   });
+                            // },
+                          ),
+                          DataColumn(
+                            label: Text('Receipient'),
+                          ),
+                          DataColumn(
+                            label: Text('Note'),
+                          ),
+                          DataColumn(
+                            label: Text('Actions'),
+                          ),
+                        ],
+                        source: FixMeDataSource(filteredRequests, context),
 
-                  // header: const Text(
-                  //   'Your Requests',
-                  //   style: TextStyle(fontWeight: FontWeight.bold),
-                  // ),
-                  // availableRowsPerPage: const [5, 6, 7, 8, 9, 10],
-                  // onRowsPerPageChanged: (value) {
-                  //   setState(() {
-                  //     _rowsPerPage = value ?? 5;
-                  //   });
-                  // },
-                ),
+                        // header: const Text(
+                        //   'Your Requests',
+                        //   style: TextStyle(fontWeight: FontWeight.bold),
+                        // ),
+                        // availableRowsPerPage: const [5, 6, 7, 8, 9, 10],
+                        // onRowsPerPageChanged: (value) {
+                        //   setState(() {
+                        //     _rowsPerPage = value ?? 5;
+                        //   });
+                        // },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 72)
+                ],
               ),
             ),
-            const SizedBox(height: 72)
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Issue item"),
         icon: const Icon(Icons.add),
@@ -217,7 +253,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                         Expanded(
                           child: FormTextField(
                             controller: itemNumber,
-                            labelText: "Item number",
+                            labelText: "Quantity",
                             hintText: "No of items",
                             filled: true,
                             keyboardType: TextInputType.number,
@@ -286,21 +322,30 @@ class FixMeDataSource extends DataTableSource {
             child: Text(request['department'], overflow: TextOverflow.ellipsis),
           ),
         ),
+         DataCell(
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: 0.15 * MediaQuery.sizeOf(context).width,
+            ),
+            child: Text(request['itemName'], overflow: TextOverflow.ellipsis),
+          ),
+        ),
+        
+        DataCell(
+          Text(request["itemNumber"].toString()),
+        ),
         DataCell(
           ConstrainedBox(
             constraints: BoxConstraints(
               minWidth: 0.11 * MediaQuery.sizeOf(context).width,
             ),
-            child: Text(request['receipient'], overflow: TextOverflow.ellipsis),
+            child: Text(request['recipient'], overflow: TextOverflow.ellipsis),
           ),
-        ),
-        DataCell(
-          Text(request["itemNumber"].toString()),
         ),
         DataCell(
           SizedBox(
             width: 0.2 * MediaQuery.sizeOf(context).width,
-            child: Text(request['Note'], overflow: TextOverflow.ellipsis),
+            child: Text(request['note'], overflow: TextOverflow.ellipsis),
           ),
         ),
         DataCell(
@@ -314,7 +359,14 @@ class FixMeDataSource extends DataTableSource {
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      slideLeftTransition(
+                        IssuanceDetailsPage(issuanceDetails: request),
+                      ),
+                    );
+                  },
                   child: const Text("View"),
                 ),
                 // SizedBox(width: 8),

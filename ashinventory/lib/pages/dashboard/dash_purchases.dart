@@ -1,4 +1,5 @@
 // import 'dart:math';
+import 'package:ashinventory/components/empty_screen.dart';
 import 'package:ashinventory/components/text_field.dart';
 import 'package:ashinventory/services/callback.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +23,59 @@ class _DashPurchasesState extends State<DashPurchases> {
   // final tableController = PagedDataTableController<String, Post>();
   // final hScrollController = ScrollController();
   final int _rowsPerPage = 10;
-  final List<Map<String, dynamic>> data = [
-    {
-      "supplier": "Supplier LLC.",
-      "itemName": "Oscilloscope",
-      "supplierContact": "sup1@gmail.com",
-      "purchaseDate": DateTime.now().subtract(const Duration(days: 1)),
-      // "date": DateTime.now().subtract(const Duration(days: 1)),
-      // "receipient": "Receipient",
-      "unitPriceGHS": 100,
-      "quantity": 1,
-      "totalCostGHS": 100,
-      // "totalCostUSD": 1562,
-      "invoiceNumber": 5325454545,
-    },
-  ];
+ final List<Map<String, dynamic>> data = [
+  {
+    "supplier": "Tech Supplies Ltd.",
+    "itemName": "Multimeter",
+    "supplierContact": "techsupplies@gmail.com",
+    "purchaseDate": DateTime.now().subtract(const Duration(days: 3)),
+    "unitPriceGHS": 250,
+    "quantity": 2,
+    "totalCostGHS": 500,
+    "invoiceNumber": 9876543210,
+  },
+  {
+    "supplier": "Office Essentials Co.",
+    "itemName": "Printer Paper",
+    "supplierContact": "officeessentials@gmail.com",
+    "purchaseDate": DateTime.now().subtract(const Duration(days: 5)),
+    "unitPriceGHS": 50,
+    "quantity": 10,
+    "totalCostGHS": 500,
+    "invoiceNumber": 1234567890,
+  },
+  {
+    "supplier": "EduTech Ghana",
+    "itemName": "Projector",
+    "supplierContact": "edutechgh@gmail.com",
+    "purchaseDate": DateTime.now().subtract(const Duration(days: 7)),
+    "unitPriceGHS": 3200,
+    "quantity": 1,
+    "totalCostGHS": 3200,
+    "invoiceNumber": 4567890123,
+  },
+  {
+    "supplier": "Lab Equipment Inc.",
+    "itemName": "Bunsen Burners",
+    "supplierContact": "labequip@gmail.com",
+    "purchaseDate": DateTime.now().subtract(const Duration(days: 2)),
+    "unitPriceGHS": 75,
+    "quantity": 4,
+    "totalCostGHS": 300,
+    "invoiceNumber": 5678901234,
+  },
+  {
+    "supplier": "Construction Tools GH",
+    "itemName": "Power Drill",
+    "supplierContact": "constructtools@gmail.com",
+    "purchaseDate": DateTime.now().subtract(const Duration(days: 1)),
+    "unitPriceGHS": 450,
+    "quantity": 3,
+    "totalCostGHS": 1350,
+    "invoiceNumber": 6789012345,
+  },
+];
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +87,20 @@ class _DashPurchasesState extends State<DashPurchases> {
                   .contains(widget.searchQuery.text.toLowerCase()) ||
               element["supplier"]
                   .toLowerCase()
-                  .contains(widget.searchQuery.text.toLowerCase()),
+                  .contains(widget.searchQuery.text.toLowerCase())||
+              element["supplierContact"]
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase())||
+              element["invoiceNumber"].toString()
+                  .toLowerCase()
+                  .contains(widget.searchQuery.text.toLowerCase())
+                  ,
         )
         .toList();
     return Scaffold(
-      body: SingleChildScrollView(
+      body:filteredRequests.isEmpty? const EmptyScreen(
+        title: 'No Results',
+      ): SingleChildScrollView(
         // color: Colors.amber,
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -103,7 +151,9 @@ class _DashPurchasesState extends State<DashPurchases> {
                   // dataRowMaxHeight: double.maxFinite,
                   showCheckboxColumn: false,
                   rowsPerPage:
-                      data.length < _rowsPerPage ? data.length : _rowsPerPage,
+                      filteredRequests.length < _rowsPerPage
+                            ? filteredRequests.length
+                            : _rowsPerPage,
                   columnSpacing: 16, showEmptyRows: false,
 
                   columns: const [
