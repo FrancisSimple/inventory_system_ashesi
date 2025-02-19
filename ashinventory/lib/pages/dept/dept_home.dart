@@ -98,7 +98,8 @@ class _DashHomePageState extends State<DeptsPage>
                   ),
                 ),
               ],
-              if (MediaQuery.sizeOf(context).width < 886 &&(MediaQuery.sizeOf(context).width >= 760 ||
+              if (MediaQuery.sizeOf(context).width < 886 &&
+                  (MediaQuery.sizeOf(context).width >= 760 ||
                       MediaQuery.sizeOf(context).width <= 462))
                 Expanded(
                   flex: 4,
@@ -109,8 +110,8 @@ class _DashHomePageState extends State<DeptsPage>
                     onChanged: (value) {
                       setState(() {});
                     },
-                    constraints: BoxConstraints(minWidth: 100, maxWidth: 200,minHeight: 40),
-                    
+                    constraints: BoxConstraints(
+                        minWidth: 100, maxWidth: 200, minHeight: 40),
                   ),
                 ),
               if (MediaQuery.sizeOf(context).width < 760)
@@ -120,9 +121,15 @@ class _DashHomePageState extends State<DeptsPage>
               if (MediaQuery.sizeOf(context).width > 760) ...[
                 const Spacer(),
                 FilledButton(
+                  style: const ButtonStyle(
+                    padding: WidgetStatePropertyAll(
+                      EdgeInsets.symmetric(horizontal: 12),
+                    ),
+                  ),
                   onPressed: () {},
                   child: const Text("Summary"),
                 ),
+                const SizedBox(width: 16),
               ],
             ],
           ),
@@ -179,8 +186,8 @@ class _DashHomePageState extends State<DeptsPage>
                     onChanged: (value) {
                       setState(() {});
                     },
-                    constraints: BoxConstraints(minWidth: 100, maxWidth: 200, minHeight: 40),
-                    
+                    constraints: BoxConstraints(
+                        minWidth: 100, maxWidth: 200, minHeight: 40),
                   ),
                 ),
               const Spacer(),
