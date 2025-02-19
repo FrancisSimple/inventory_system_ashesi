@@ -33,112 +33,160 @@ class _DashHomePageState extends State<DashboardPage>
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(MediaQuery.sizeOf(context).width.toString());
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: (MediaQuery.sizeOf(context).width > 760)
-              ? const Size.fromHeight(212)
-              : Size.fromHeight(156),
-          child: Container(
-            // color: const Color(0xFFFFF1F1),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 56),
+          // Title and contact
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(height: 56),
-                // Title and contact
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Dashboard",
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      FilledButton(
-                        onPressed: () {},
-                        child: const Text("Summary"),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    // runAlignment: WrapAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
+                (MediaQuery.sizeOf(context).width < 760)
+                    ? Expanded(
                         flex: 4,
                         child: SearchBar(
+                          leading: const Icon(Icons.search),
                           controller: searchController,
                           onChanged: (value) => setState(() {}),
                           hintText: "Search",
                           constraints: const BoxConstraints(
-                              minWidth: 100, maxWidth: 200),
-                          trailing: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.search))
-                          ],
+                              minWidth: 100, maxWidth: 200, minHeight: 40),
                         ),
-                      ),
-                      Expanded(child: SizedBox()),
-                      // Month Selector
-                      SizedBox(
-                          width: 280,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              MonthSelector(
-                                onDateChanged: (date) => setState(
-                                  () {
-                                    debugPrint(date.toString());
-                                  },
-                                ),
-                              ),
-                            ],
-                          )),
-                    ],
+                      )
+                    : Text("Dashboard",
+                        style: Theme.of(context).textTheme.headlineMedium),
+                if (MediaQuery.sizeOf(context).width > 760) ...[
+                  SizedBox(
+                    width: 16,
                   ),
-                ),
-                // Tabs
-                TabBar(
-                  controller: tabController,
-                  tabs: const [
-                    Tab(text: "Items"),
-                    Tab(text: "Issuances"),
-                    Tab(text: "Opening Stock"),
-                    Tab(text: "Purchases"),
-                  ],
-                  onTap: (value) {
-                    searchController.clear();
-                  },
-                )
+                  FilledButton(
+                    style: const ButtonStyle(
+                      padding: WidgetStatePropertyAll(
+                        EdgeInsets.symmetric(horizontal: 12),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text("Summary"),
+                  ),
+                  if (MediaQuery.sizeOf(context).width < 427.2)
+                    SizedBox(
+                        width: 260,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            MonthSelector(
+                              onDateChanged: (date) => setState(
+                                () {
+                                  debugPrint(date.toString());
+                                },
+                              ),
+                            ),
+                          ],
+                        )),
+                ],
+                if (MediaQuery.sizeOf(context).width > 423 &&
+                    MediaQuery.sizeOf(context).width < 760)
+                  SizedBox(
+                      width: 260,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MonthSelector(
+                            onDateChanged: (date) => setState(
+                              () {
+                                debugPrint(date.toString());
+                              },
+                            ),
+                          ),
+                        ],
+                      )),
               ],
             ),
-            // const SizedBox(height: 10),
-            // Tabs and Date Selector
-            // ),
           ),
-        ),
-        body: TabBarView(
-          controller: tabController,
-          children: [
-            DashItems(
-              searchQuery: searchController,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              // runAlignment: WrapAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (MediaQuery.sizeOf(context).width > 760) ...[
+                if (MediaQuery.sizeOf(context).width > 1185)  const Spacer(),
+                  Expanded(
+                    flex: 4,
+                    child: SearchBar(
+                      leading: const Icon(Icons.search),
+                      controller: searchController,
+                      onChanged: (value) => setState(() {}),
+                      hintText: "Search",
+                      constraints: const BoxConstraints(
+                          minWidth: 100, maxWidth: 200, minHeight: 40),
+                    ),
+                  ),
+                ],
+
+                const Spacer(),
+                // Month Selector
+                if (MediaQuery.sizeOf(context).width < 423 ||
+                    MediaQuery.sizeOf(context).width > 760)
+                  SizedBox(
+                      width: 260,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          MonthSelector(
+                            onDateChanged: (date) => setState(
+                              () {
+                                debugPrint(date.toString());
+                              },
+                            ),
+                          ),
+                        ],
+                      )),
+              ],
             ),
-            DashIssuances(
-              searchQuery: searchController,
+          ),
+          // Tabs
+          TabBar(
+            controller: tabController,
+            tabs: const [
+              Tab(text: "Items"),
+              Tab(text: "Issuances"),
+              Tab(text: "Opening Stock"),
+              Tab(text: "Purchases"),
+            ],
+            onTap: (value) {
+              searchController.clear();
+            },
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                DashItems(
+                  searchQuery: searchController,
+                ),
+                DashIssuances(
+                  searchQuery: searchController,
+                ),
+                DashOpStock(
+                  searchQuery: searchController,
+                ),
+                DashPurchases(
+                  searchQuery: searchController,
+                ),
+                // ,
+                //     ))
+              ],
             ),
-            DashOpStock(
-              searchQuery: searchController,
-            ),
-            DashPurchases(
-              searchQuery: searchController,
-            ),
-            // ,
-            //     ),
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 }

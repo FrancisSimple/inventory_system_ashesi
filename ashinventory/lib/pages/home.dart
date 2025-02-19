@@ -73,6 +73,24 @@ class _HomePageState extends State<HomePage> {
       appBar: (MediaQuery.sizeOf(context).width < 760)
           ? AppBar(
               backgroundColor: Colors.transparent,
+              // centerTitle: true,
+              actions: [
+                FilledButton(
+                  style: const ButtonStyle(
+                    padding: WidgetStatePropertyAll(
+                      EdgeInsets.symmetric(horizontal: 12),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("Summary"),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+              ],
+              title: selectedTab == null
+                  ? const Text("Dashboard")
+                  : Text(sideNavItems[selectedTab!]["name"]),
             )
           : null,
       drawer: (MediaQuery.sizeOf(context).width < 760)
@@ -208,45 +226,50 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                              sideNavItems.isEmpty? const MiniEmptyScreen(
-                              title: "No departments available",  
-                              subtitle: "Click the '+' button to add a new department",
-                            )  : ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: sideNavItems.length,
-                                itemBuilder: (context, index) => SideNavButton(
-                                  text: sideNavItems[index]["name"],
-                                  sub: true,
-                                  isActive: selectedTab == index,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      selectedTab = index;
-                                    });
-                                  },
-                                  onIconPressed: () {
-                                    callDialog(
-                                      context: context,
-                                      content: Container(
-                                        width: 0.5 *
-                                            MediaQuery.sizeOf(context).width,
-                                        child: Text(
-                                            "Removing this department will remove all data associated with it."),
+                              sideNavItems.isEmpty
+                                  ? const MiniEmptyScreen(
+                                      title: "No departments available",
+                                      subtitle:
+                                          "Click the '+' button to add a new department",
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: sideNavItems.length,
+                                      itemBuilder: (context, index) =>
+                                          SideNavButton(
+                                        text: sideNavItems[index]["name"],
+                                        sub: true,
+                                        isActive: selectedTab == index,
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          setState(() {
+                                            selectedTab = index;
+                                          });
+                                        },
+                                        onIconPressed: () {
+                                          callDialog(
+                                            context: context,
+                                            content: Container(
+                                              width: 0.5 *
+                                                  MediaQuery.sizeOf(context)
+                                                      .width,
+                                              child: Text(
+                                                  "Removing this department will remove all data associated with it."),
+                                            ),
+                                            title:
+                                                "Remove ${sideNavItems[index]["name"]}?",
+                                            onConfirm: () {
+                                              setState(() {
+                                                sideNavItems.removeAt(index);
+                                                selectedTab = null;
+                                              });
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        },
                                       ),
-                                      title:
-                                          "Remove ${sideNavItems[index]["name"]}?",
-                                      onConfirm: () {
-                                        setState(() {
-                                          sideNavItems.removeAt(index);
-                                          selectedTab = null;
-                                        });
-                                        Navigator.pop(context);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
+                                    ),
                             ],
                           ),
                           const SizedBox(
@@ -399,41 +422,45 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                            sideNavItems.isEmpty?MiniEmptyScreen(
-                              title: "No departments available",  
-                              subtitle: "Click the '+' button to add a new department",
-                            )  :ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: sideNavItems.length,
-                                itemBuilder: (context, index) => SideNavButton(
-                                  text: sideNavItems[index]["name"],
-                                  sub: true,
-                                  isActive: selectedTab == index,
-                                  onPressed: () {
-                                    // Navigator.pop(context);
-                                    setState(() {
-                                      selectedTab = index;
-                                    });
-                                  },
-                                  onIconPressed: () {
-                                    callDialog(
-                                      context: context,
-                                      content: Text(
-                                          "Removing this department will remove all data associated with it."),
-                                      title:
-                                          "Delete ${sideNavItems[index]["name"]} department?",
-                                      onConfirm: () {
-                                        setState(() {
-                                          sideNavItems.removeAt(index);
-                                          selectedTab = null;
-                                        });
-                                        Navigator.pop(context);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
+                              sideNavItems.isEmpty
+                                  ? MiniEmptyScreen(
+                                      title: "No departments available",
+                                      subtitle:
+                                          "Click the '+' button to add a new department",
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: sideNavItems.length,
+                                      itemBuilder: (context, index) =>
+                                          SideNavButton(
+                                        text: sideNavItems[index]["name"],
+                                        sub: true,
+                                        isActive: selectedTab == index,
+                                        onPressed: () {
+                                          // Navigator.pop(context);
+                                          setState(() {
+                                            selectedTab = index;
+                                          });
+                                        },
+                                        onIconPressed: () {
+                                          callDialog(
+                                            context: context,
+                                            content: Text(
+                                                "Removing this department will remove all data associated with it."),
+                                            title:
+                                                "Delete ${sideNavItems[index]["name"]} department?",
+                                            onConfirm: () {
+                                              setState(() {
+                                                sideNavItems.removeAt(index);
+                                                selectedTab = null;
+                                              });
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
                             ],
                           ),
                           const SizedBox(

@@ -47,7 +47,7 @@ class _MonthSelectorState extends State<MonthSelector> {
       children: [
         Text(
           DateFormat("MMMM, yyyy").format(selectedDate),
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(),
         ),
         const SizedBox(
           width: 8,
@@ -55,6 +55,12 @@ class _MonthSelectorState extends State<MonthSelector> {
         Row(
           children: [
             IconButton.filled(
+              padding: EdgeInsets.all(0),
+              iconSize: 20,
+              style: ButtonStyle(
+                maximumSize: WidgetStatePropertyAll(Size(32, 32)),
+                minimumSize: WidgetStatePropertyAll(Size(32, 32)),
+              ),
               onPressed: onPrev(),
               icon: const Icon(Icons.chevron_left_rounded),
             ),
@@ -62,6 +68,12 @@ class _MonthSelectorState extends State<MonthSelector> {
               width: 4,
             ),
             IconButton.filled(
+              padding: EdgeInsets.all(0),
+              iconSize: 20,
+              style: ButtonStyle(
+                maximumSize: WidgetStatePropertyAll(Size(32, 32)),
+                minimumSize: WidgetStatePropertyAll(Size(32, 32)),
+              ),
               // color: Theme.of(context).colorScheme.,
               onPressed: onNext(),
               icon: const Icon(Icons.chevron_right_rounded),
