@@ -6,6 +6,7 @@ import 'package:ashinventory/pages/details/items.dart';
 import 'package:ashinventory/services/callback.dart';
 import 'package:ashinventory/services/transitions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
 import 'package:intl/intl.dart';
@@ -27,47 +28,47 @@ class _DashIssuancesState extends State<DashIssuances> {
   // final hScrollController = ScrollController();
   final int _rowsPerPage = 10;
   final List<Map<String, dynamic>> data = [
-  {
-    "department": "Engineering",
-    "date": DateTime.now().subtract(const Duration(days: 1)),
-    "recipient": "John Doe",
-    "itemNumber": 5,
-    "itemName": "A4 Sheets",
-    "note": "To be returned",
-  },
-  {
-    "department": "I.T.",
-    "date": DateTime.now().subtract(const Duration(days: 3)),
-    "recipient": "Jane Smith",
-    "itemNumber": 2,
-    "itemName": "Oscilloscope",
-    "note": "Permanent allocation",
-  },
-  {
-    "department": "Library",
-    "date": DateTime.now().subtract(const Duration(days: 7)),
-    "recipient": "Michael Brown",
-    "itemNumber": 10,
-    "itemName": "Projector",
-    "note": "For seminar use",
-  },
-  {
-    "department": "Business",
-    "date": DateTime.now().subtract(const Duration(days: 2)),
-    "recipient": "Emily White",
-    "itemNumber": 3,
-    "itemName": "Calculator",
-    "note": "To be shared among staff",
-  },
-  {
-    "department": "Health Center",
-    "date": DateTime.now().subtract(const Duration(days: 4)),
-    "recipient": "Dr. Alex Green",
-    "itemNumber": 1,
-    "itemName": "First Aid Kit",
-    "note": "For emergency cases",
-  },
-];
+    {
+      "department": "Engineering",
+      "date": DateTime.now().subtract(const Duration(days: 1)),
+      "recipient": "John Doe",
+      "itemNumber": 5,
+      "itemName": "A4 Sheets",
+      "note": "To be returned",
+    },
+    {
+      "department": "I.T.",
+      "date": DateTime.now().subtract(const Duration(days: 3)),
+      "recipient": "Jane Smith",
+      "itemNumber": 2,
+      "itemName": "Oscilloscope",
+      "note": "Permanent allocation",
+    },
+    {
+      "department": "Library",
+      "date": DateTime.now().subtract(const Duration(days: 7)),
+      "recipient": "Michael Brown",
+      "itemNumber": 10,
+      "itemName": "Projector",
+      "note": "For seminar use",
+    },
+    {
+      "department": "Business",
+      "date": DateTime.now().subtract(const Duration(days: 2)),
+      "recipient": "Emily White",
+      "itemNumber": 3,
+      "itemName": "Calculator",
+      "note": "To be shared among staff",
+    },
+    {
+      "department": "Health Center",
+      "date": DateTime.now().subtract(const Duration(days: 4)),
+      "recipient": "Dr. Alex Green",
+      "itemNumber": 1,
+      "itemName": "First Aid Kit",
+      "note": "For emergency cases",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +132,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                           DataColumn(
                             label: Text('Department'),
                           ),
-                          
-                           DataColumn(
+                          DataColumn(
                             label: Text('Item name'),
                           ),
                           DataColumn(
@@ -154,7 +154,8 @@ class _DashIssuancesState extends State<DashIssuances> {
                             label: Text('Actions'),
                           ),
                         ],
-                        source: FixMeDataSource(filteredRequests, context),
+                        source: FixMeDataSource(
+                            filteredRequests.reversed.toList(), context),
 
                         // header: const Text(
                         //   'Your Requests',
@@ -178,6 +179,7 @@ class _DashIssuancesState extends State<DashIssuances> {
         icon: const Icon(Icons.add),
         onPressed: () {
           TextEditingController itemName = TextEditingController();
+          TextEditingController receipient = TextEditingController();
           TextEditingController itemNumber = TextEditingController();
           TextEditingController note = TextEditingController();
           // TextEditingController link = TextEditingController();
@@ -206,6 +208,13 @@ class _DashIssuancesState extends State<DashIssuances> {
                       filled: true,
                     ),
                     SizedBox(height: 16),
+                    FormTextField(
+                      controller: receipient,
+                      // hintText: "Item name",
+                      labelText: "Receipient",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -226,7 +235,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                             },
                             onChanged: (value) {
                               setState(() {
-                                // selectedDepartment = value;
+                                selectedDepartment = value;
                                 // selectedTown = null;
                                 // selectedLocality = null;
                               });
@@ -257,6 +266,9 @@ class _DashIssuancesState extends State<DashIssuances> {
                             hintText: "No of items",
                             filled: true,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                             // filledColor: true,
                           ),
                         ),
@@ -276,7 +288,22 @@ class _DashIssuancesState extends State<DashIssuances> {
               ),
               title: "Issue an item",
               confirmText: "Issue item",
-              onConfirm: () {});
+              onConfirm: () {
+                setState(() {
+                  data.add(
+                    {
+                      "department": selectedDepartment ?? "N/A",
+                      "date": DateTime.now(),
+                      "recipient": receipient.text.trim(),
+                      "itemNumber":
+                          int.tryParse(itemNumber.text.trim()) ?? "N/A",
+                      "itemName": itemName.text.trim(),
+                      "note": note.text.trim(),
+                    },
+                  );
+                });
+                Navigator.pop(context);
+              });
         },
       ),
     );
@@ -322,7 +349,7 @@ class FixMeDataSource extends DataTableSource {
             child: Text(request['department'], overflow: TextOverflow.ellipsis),
           ),
         ),
-         DataCell(
+        DataCell(
           ConstrainedBox(
             constraints: BoxConstraints(
               minWidth: 0.15 * MediaQuery.sizeOf(context).width,
@@ -330,7 +357,6 @@ class FixMeDataSource extends DataTableSource {
             child: Text(request['itemName'], overflow: TextOverflow.ellipsis),
           ),
         ),
-        
         DataCell(
           Text(request["itemNumber"].toString()),
         ),

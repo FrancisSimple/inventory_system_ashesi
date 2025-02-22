@@ -13,7 +13,9 @@ class DeptPurchases extends StatefulWidget {
   const DeptPurchases({
     super.key,
     required this.searchQuery,
+    required this.dept,
   });
+  final String dept;
 
   @override
   State<DeptPurchases> createState() => _DeptPurchasesState();
@@ -198,7 +200,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                             label: Text('invoice number'),
                           ),
                         ],
-                        source: FixMeDataSource(filteredRequests, context),
+                        source: FixMeDataSource(filteredRequests.reversed.toList(), context),
 
                         // header: const Text(
                         //   'Your Requests',
@@ -223,6 +225,8 @@ class _DeptPurchasesState extends State<DeptPurchases> {
           TextEditingController unitPrice = TextEditingController();
           TextEditingController invoiceNumber = TextEditingController();
           TextEditingController quantity = TextEditingController();
+          TextEditingController supplierName = TextEditingController();
+          TextEditingController supplierContact = TextEditingController();
           // TextEditingController link = TextEditingController();
           String? selectedDepartment;
           List<String> departments = [
@@ -303,24 +307,40 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                     ),
                     SizedBox(height: 8),
                     FormTextField(
-                      controller: itemName,
+                      controller: supplierName,
                       // hintText: "Item name",
                       labelText: "Supplier name",
                       filled: true,
                     ),
                     SizedBox(height: 16),
                     FormTextField(
-                      controller: itemName,
+                      controller: supplierContact,
                       // hintText: "Item name",
                       labelText: "Supplier contact",
                       filled: true,
-                    )
+                    ),
+                    
                   ],
                 )),
               ),
               title: "Record a purchase",
               confirmText: "Confirm",
-              onConfirm: () {});
+              onConfirm: () {
+                setState(() {
+                  data.add({
+                    "supplier": supplierName.text.trim(),
+                    "itemName": itemName.text.trim(),
+                    "supplierContact": supplierContact.text.trim(),
+                    "purchaseDate": DateTime.now(),
+                    "unitPriceGHS": double.tryParse(unitPrice.text.trim()),
+                    "quantity": int.tryParse(quantity.text.trim()),
+                    "totalCostGHS": 
+                        (int.tryParse(quantity.text.trim())??0)  * (double.tryParse(unitPrice.text.trim())??0) ,
+                    "invoiceNumber": invoiceNumber.text.trim(),
+                  });
+                });
+                Navigator.pop(context);
+              });
         },
         label: const Text("Add purchase"),
         icon: const Icon(Icons.add),

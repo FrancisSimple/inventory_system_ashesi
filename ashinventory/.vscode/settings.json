@@ -1,3 +1,14 @@
 {
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "files.associations": {
+    "format": "cpp",
+    "initializer_list": "cpp",
+    "list": "cpp",
+    "utility": "cpp",
+    "vector": "cpp",
+    "xhash": "cpp",
+    "xstring": "cpp",
+    "xtree": "cpp",
+    "xutility": "cpp"
+  }
 }

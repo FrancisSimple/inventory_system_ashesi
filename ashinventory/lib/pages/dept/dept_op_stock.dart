@@ -10,8 +10,9 @@ class DeptOpStock extends StatefulWidget {
   final TextEditingController searchQuery;
   const DeptOpStock({
     super.key,
-    required this.searchQuery,
+    required this.searchQuery, required this.dept,
   });
+  final String dept;
 
   @override
   State<DeptOpStock> createState() => _DeptOpStockState();

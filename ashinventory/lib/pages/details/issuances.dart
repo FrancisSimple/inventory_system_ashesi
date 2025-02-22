@@ -25,7 +25,7 @@ class IssuanceDetailsPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            _infoTile("Issued Quantity", issuanceDetails['quantity'].toString()),
+            _infoTile("Issued Quantity", issuanceDetails['itemNumber'].toString()),
             _infoTile("Department", issuanceDetails['department'] ?? 'N/A'),
             _infoTile("Recipient", issuanceDetails['recipient'] ?? 'N/A'),
             _infoTile("Issuer", issuanceDetails['issuer'] ?? 'N/A'),

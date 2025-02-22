@@ -15,7 +15,9 @@ class DeptIssuances extends StatefulWidget {
   const DeptIssuances({
     super.key,
     required this.searchQuery,
+    required this.dept,
   });
+  final String dept;
 
   @override
   State<DeptIssuances> createState() => _DeptIssuancesState();
@@ -148,7 +150,7 @@ class _DeptIssuancesState extends State<DeptIssuances> {
                             label: Text('Actions'),
                           ),
                         ],
-                        source: FixMeDataSource(filteredRequests, context),
+                        source: FixMeDataSource(filteredRequests.reversed.toList(), context),
 
                         // header: const Text(
                         //   'Your Requests',
@@ -170,10 +172,11 @@ class _DeptIssuancesState extends State<DeptIssuances> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           TextEditingController itemName = TextEditingController();
+          TextEditingController receipient = TextEditingController();
           TextEditingController itemNumber = TextEditingController();
           TextEditingController note = TextEditingController();
           // TextEditingController link = TextEditingController();
-          String? selectedDepartment;
+          String? selectedDepartment = widget.dept;
           List<String> departments = [
             "Engineering",
             "Hostels",
@@ -198,50 +201,52 @@ class _DeptIssuancesState extends State<DeptIssuances> {
                       filled: true,
                     ),
                     SizedBox(height: 16),
+                    FormTextField(
+                      controller: receipient,
+                      // hintText: "Item name",
+                      labelText: "Receipient",
+                      filled: true,
+                    ),
+                    SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Expanded(
-                        //   flex: 2,
-                        //   child: DropdownButtonFormField<String>(
-                        //     value: selectedDepartment,
-                        //     items: departments.map((country) {
-                        //       return DropdownMenuItem(
-                        //           value: country, child: Text(country));
-                        //     }).toList(),
-                        //     validator: (value) {
-                        //       // debugPrint(value.toString());
-                        //       if (value == null) {
-                        //         return "Department";
-                        //       }
-                        //       return null;
-                        //     },
-                        //     onChanged: (value) {
-                        //       setState(() {
-                        //         // selectedDepartment = value;
-                        //         // selectedTown = null;
-                        //         // selectedLocality = null;
-                        //       });
-                        //     },
-                        //     // decoration: const InputDecoration(),
-                        //     autovalidateMode:
-                        //         AutovalidateMode.onUserInteraction,
-                        //     decoration: InputDecoration(
-                        //       labelText: 'Department',
-                        //       filled: true,
-                        //       counter: const SizedBox(
-                        //         height: 0,
-                        //       ),
-                        //       border: OutlineInputBorder(
-                        //         borderRadius: BorderRadius.circular(5.0),
-                        //       ),
-                        //     ),
-                        //     // style: TextStyle(
-                        //     //   color: Theme.of(context).colorScheme.primary,
-                        //     // ),
-                        //   ),
-                        // ),
-                        // SizedBox(width: 8),
+                        Expanded(
+                          flex: 2,
+                          child: DropdownButtonFormField<String>(
+                            value: selectedDepartment,
+                            items: departments.map((country) {
+                              return DropdownMenuItem(
+                                  value: country, child: Text(country));
+                            }).toList(),
+                            validator: (value) {
+                              // debugPrint(value.toString());
+                              if (value == null) {
+                                return "Department";
+                              }
+                              return null;
+                            },
+                            onChanged: null,
+                            // decoration: const InputDecoration(),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(
+                              labelText: 'Department',
+                              filled: true,
+                              counter: const SizedBox(
+                                height: 0,
+                              ),
+                              enabled: false,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            // style: TextStyle(
+                            //   color: Theme.of(context).colorScheme.primary,
+                            // ),
+                          ),
+                        ),
+                        SizedBox(width: 8),
                         Expanded(
                           child: FormTextField(
                             controller: itemNumber,
@@ -268,7 +273,22 @@ class _DeptIssuancesState extends State<DeptIssuances> {
               ),
               title: "Issue an item",
               confirmText: "Issue item",
-              onConfirm: () {});
+              onConfirm: () {
+                setState(() {
+                  data.add(
+                    {
+                      "department": selectedDepartment ?? "N/A",
+                      "date": DateTime.now(),
+                      "recipient": receipient.text.trim(),
+                      "itemNumber":
+                          int.tryParse(itemNumber.text.trim()) ?? "N/A",
+                      "itemName": itemName.text.trim(),
+                      "note": note.text.trim(),
+                    },
+                  );
+                });
+                Navigator.pop(context);
+              });
         },
         label: const Text("Add issuance"),
         icon: const Icon(Icons.add),

@@ -227,15 +227,19 @@ class _DashHomePageState extends State<DeptsPage>
           children: [
             DeptItems(
               searchQuery: searchController,
+              dept: widget.title,
             ),
             DeptIssuances(
               searchQuery: searchController,
+              dept: widget.title,
             ),
             DeptOpStock(
               searchQuery: searchController,
+              dept: widget.title,
             ),
             DeptPurchases(
               searchQuery: searchController,
+              dept: widget.title,
             ),
           ],
         ))

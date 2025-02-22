@@ -5,6 +5,7 @@ import 'package:ashinventory/pages/details/items.dart';
 import 'package:ashinventory/services/callback.dart';
 import 'package:ashinventory/services/transitions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:ashinventory/post.dart';
 // import 'package:darq/darq.dart';
 import 'package:intl/intl.dart';
@@ -282,7 +283,7 @@ class _DashItemsState extends State<DashItems> {
                             label: Text('Quantity'),
                           ),
                           DataColumn(
-                            label: Text('Link'),
+                            label: Text('Department'),
                           ),
                           DataColumn(
                             label: Text('Last updated'),
@@ -300,7 +301,8 @@ class _DashItemsState extends State<DashItems> {
                             label: Text('Actions'),
                           ),
                         ],
-                        source: FixMeDataSource(filteredRequests, context),
+                        source: FixMeDataSource(
+                            filteredRequests.reversed.toList(), context),
 
                         // header: const Text(
                         //   'Your Requests',
@@ -322,6 +324,7 @@ class _DashItemsState extends State<DashItems> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           TextEditingController itemName = TextEditingController();
+          TextEditingController storageLocation = TextEditingController();
           TextEditingController stockNumber = TextEditingController();
           // TextEditingController link = TextEditingController();
           String? selectedDepartment;
@@ -356,9 +359,9 @@ class _DashItemsState extends State<DashItems> {
                           flex: 2,
                           child: DropdownButtonFormField<String>(
                             value: selectedDepartment,
-                            items: departments.map((country) {
+                            items: departments.map((dept) {
                               return DropdownMenuItem(
-                                  value: country, child: Text(country));
+                                  value: dept, child: Text(dept));
                             }).toList(),
                             validator: (value) {
                               // debugPrint(value.toString());
@@ -372,6 +375,7 @@ class _DashItemsState extends State<DashItems> {
                                 // selectedDepartment = value;
                                 // selectedTown = null;
                                 // selectedLocality = null;
+                                selectedDepartment = value;
                               });
                             },
                             // decoration: const InputDecoration(),
@@ -399,17 +403,40 @@ class _DashItemsState extends State<DashItems> {
                             labelText: "Quantity",
                             filled: true,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
                             // filledColor: true,
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 16),
+                    FormTextField(
+                      controller: storageLocation,
+                      // hintText: "Item name",
+                      labelText: "Storage location",
+                      filled: true,
                     ),
                   ],
                 )),
               ),
               title: "Add an item",
               confirmText: "Add item",
-              onConfirm: () {});
+              onConfirm: () {
+                setState(() {});
+                data.add(
+                  
+                  {
+                    "name": itemName.text.trim(),
+                    "lastUpdated": DateTime.now(),
+                    "link": selectedDepartment,
+                    "stockNumber": int.tryParse(stockNumber.text.trim()),
+                    "storageLocation": storageLocation.text.trim(),
+                  },
+                );
+                Navigator.pop(context);
+              });
         },
         label: const Text("Add item"),
         icon: const Icon(Icons.add),
@@ -489,10 +516,12 @@ class FixMeDataSource extends DataTableSource {
                           borderRadius: BorderRadius.circular(4)))),
                   onPressed: () {
                     TextEditingController itemName = TextEditingController();
+                    TextEditingController storageLocation =
+                        TextEditingController();
                     TextEditingController itemNumber = TextEditingController();
                     TextEditingController note = TextEditingController();
                     // TextEditingController link = TextEditingController();
-                    String? selectedDepartment;
+                    String? selectedDepartment = request['link'];
                     List<String> departments = [
                       "Engineering",
                       "Hostels",
@@ -500,6 +529,7 @@ class FixMeDataSource extends DataTableSource {
                       "I.T.",
                       "Business",
                       "Library",
+                      "Facilities & Logistics"
                     ];
 
                     callDialog(
@@ -511,7 +541,9 @@ class FixMeDataSource extends DataTableSource {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               FormTextField(
-                                controller: itemName,
+                                enabled: false,
+                                // controller: itemName,
+                                initialValue: request['name'],
                                 // hintText: "Item name",
                                 labelText: "Item name",
                                 filled: true,
@@ -522,12 +554,13 @@ class FixMeDataSource extends DataTableSource {
                                 children: [
                                   Expanded(
                                     flex: 2,
+                                    // child: SizedBox(),
                                     child: DropdownButtonFormField<String>(
                                       value: selectedDepartment,
-                                      items: departments.map((country) {
+                                      items: departments.map((dept) {
                                         return DropdownMenuItem(
-                                            value: country,
-                                            child: Text(country));
+                                            value: dept,
+                                            child: Text(dept));
                                       }).toList(),
                                       validator: (value) {
                                         // debugPrint(value.toString());
@@ -536,19 +569,14 @@ class FixMeDataSource extends DataTableSource {
                                         }
                                         return null;
                                       },
-                                      onChanged: (value) {
-                                        // setState(() {
-                                        // selectedDepartment = value;
-                                        // selectedTown = null;
-                                        // selectedLocality = null;
-                                        // });
-                                      },
+                                      onChanged: null,
                                       // decoration: const InputDecoration(),
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                       decoration: InputDecoration(
                                         labelText: 'Department',
                                         filled: true,
+                                        enabled: false,
                                         counter: const SizedBox(
                                           height: 0,
                                         ),
@@ -569,12 +597,22 @@ class FixMeDataSource extends DataTableSource {
                                       labelText: "Quantity",
                                       hintText: "No of items",
                                       filled: true,
+
                                       keyboardType: TextInputType.number,
                                       // filledColor: true,
                                     ),
                                   ),
                                 ],
                               ),
+                              // SizedBox(width: 8),
+                              // SizedBox(height: 16),
+                              // FormTextField(
+                              //   controller: note,
+                              //   // initialValue: request['name'],
+                              //   // hintText: "Item name",
+                              //   labelText: "Add a note",
+                              //   filled: true,
+                              // ),
                               SizedBox(height: 16),
                               FormTextField(
                                 controller: note,
@@ -589,7 +627,9 @@ class FixMeDataSource extends DataTableSource {
                         ),
                         title: "Issue an item",
                         confirmText: "Issue item",
-                        onConfirm: () {});
+                        onConfirm: () {
+
+                        });
                   },
                   child: const Text("Issue"),
                 ),
@@ -633,7 +673,9 @@ class FixMeDataSource extends DataTableSource {
                               ),
                               SizedBox(height: 8),
                               FormTextField(
-                                controller: itemName,
+                                enabled: false,
+                                // controller: itemName,
+                                initialValue: request['name'],
                                 // hintText: "Item name",
                                 labelText: "Item name",
                                 filled: true,

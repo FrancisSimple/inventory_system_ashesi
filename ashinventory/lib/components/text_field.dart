@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FormTextField extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? hintText;
+  final String? initialValue;
   final Widget? prefixIcon;
   final bool hassuffixIcon;
   bool obscureText;
@@ -16,6 +17,7 @@ class FormTextField extends StatefulWidget {
   int? maxLines;
   int? minLines;
   final bool filled;
+  final bool? enabled;
   final bool isDense;
   final String? labelText;
   List<TextInputFormatter>? inputFormatters;
@@ -23,7 +25,7 @@ class FormTextField extends StatefulWidget {
 
   FormTextField({
     super.key,
-    required this.controller,
+    this.controller,
     this.obscureText = false,
     this.hintText,
     this.onChanged,
@@ -39,6 +41,8 @@ class FormTextField extends StatefulWidget {
     this.isDense = false,
     this.filledColor,
     this.labelText,
+    this.enabled,
+    this.initialValue,
   });
 
   @override
@@ -49,14 +53,15 @@ class _FormTextFieldState extends State<FormTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enabled,
       key: widget.key,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textAlignVertical: TextAlignVertical.top,
       controller: widget.controller,
+      initialValue: widget.initialValue,
       validator: widget.validator,
-      
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
@@ -111,7 +116,8 @@ class _FormTextFieldState extends State<FormTextField> {
             : null,
       ),
       style: TextStyle(
-        color: Theme.of(context).colorScheme.primary,
+        // color: Theme.of(context).colorScheme.primary,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
