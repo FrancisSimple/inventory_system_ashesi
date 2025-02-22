@@ -109,6 +109,22 @@ class _DashPurchasesState extends State<DashPurchases> {
                   SizedBox(
                     height: 16,
                   ),
+                  // ConstrainedBox( 
+                  //   constraints: BoxConstraints(
+                  //       maxHeight: 0.6*MediaQuery.sizeOf(context).height),
+                  //   child: CarouselView(
+                  //     itemSnapping: true,
+                  //     scrollDirection: Axis.vertical,
+                  //     itemExtent: 0.5*MediaQuery.sizeOf(context).height,
+                  //     children: [
+                  //       Card.filled(),
+                  //       Card.filled(),
+                  //       Card.filled(),
+                  //       Card.filled(),
+                  //       Card.filled(),
+                  //     ],
+                  //   ),
+                  // ),
                   Row(
                     // mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -197,7 +213,8 @@ class _DashPurchasesState extends State<DashPurchases> {
                             label: Text('invoice number'),
                           ),
                         ],
-                        source: FixMeDataSource(filteredRequests.reversed.toList(), context),
+                        source: FixMeDataSource(
+                            filteredRequests.reversed.toList(), context),
 
                         // header: const Text(
                         //   'Your Requests',
@@ -316,7 +333,6 @@ class _DashPurchasesState extends State<DashPurchases> {
                       labelText: "Supplier contact",
                       filled: true,
                     ),
-                    
                   ],
                 )),
               ),
@@ -331,8 +347,8 @@ class _DashPurchasesState extends State<DashPurchases> {
                     "purchaseDate": DateTime.now(),
                     "unitPriceGHS": double.tryParse(unitPrice.text.trim()),
                     "quantity": int.tryParse(quantity.text.trim()),
-                    "totalCostGHS": 
-                        (int.tryParse(quantity.text.trim())??0)  * (double.tryParse(unitPrice.text.trim())??0) ,
+                    "totalCostGHS": (int.tryParse(quantity.text.trim()) ?? 0) *
+                        (double.tryParse(unitPrice.text.trim()) ?? 0),
                     "invoiceNumber": invoiceNumber.text.trim(),
                   });
                 });
