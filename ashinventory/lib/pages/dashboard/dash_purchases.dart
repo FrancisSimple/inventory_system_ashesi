@@ -109,22 +109,6 @@ class _DashPurchasesState extends State<DashPurchases> {
                   SizedBox(
                     height: 16,
                   ),
-                  // ConstrainedBox( 
-                  //   constraints: BoxConstraints(
-                  //       maxHeight: 0.6*MediaQuery.sizeOf(context).height),
-                  //   child: CarouselView(
-                  //     itemSnapping: true,
-                  //     scrollDirection: Axis.vertical,
-                  //     itemExtent: 0.5*MediaQuery.sizeOf(context).height,
-                  //     children: [
-                  //       Card.filled(),
-                  //       Card.filled(),
-                  //       Card.filled(),
-                  //       Card.filled(),
-                  //       Card.filled(),
-                  //     ],
-                  //   ),
-                  // ),
                   Row(
                     // mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,
