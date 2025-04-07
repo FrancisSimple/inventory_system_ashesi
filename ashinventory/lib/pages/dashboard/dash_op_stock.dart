@@ -80,7 +80,7 @@ class _DashOpStockState extends State<DashOpStock> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(height: 16,),
+            const SizedBox(height: 16,),
             Row(
               // mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -95,10 +95,10 @@ class _DashOpStockState extends State<DashOpStock> {
                           .titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold)),
                 ),
-                        SizedBox(width: 8,),
+                        const SizedBox(width: 8,),
               ],
             ),
-            SizedBox(height: 8,),
+            const SizedBox(height: 8,),
             SelectionArea(
               child: DataTableTheme(
                 data: DataTableThemeData(

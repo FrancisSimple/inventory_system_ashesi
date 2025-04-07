@@ -115,7 +115,7 @@ class _FormTextFieldState extends State<FormTextField> {
               )
             : null,
       ),
-      style: TextStyle(
+      style: const TextStyle(
         // color: Theme.of(context).colorScheme.primary,
         fontWeight: FontWeight.w600,
       ),

@@ -62,7 +62,7 @@ class _DashHomePageState extends State<DashboardPage>
                     : Text("Dashboard",
                         style: Theme.of(context).textTheme.headlineMedium),
                 if (MediaQuery.sizeOf(context).width > 760) ...[
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
                   FilledButton(

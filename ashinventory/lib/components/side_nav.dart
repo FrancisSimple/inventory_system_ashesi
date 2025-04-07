@@ -53,13 +53,13 @@ class _SideNavState extends State<SideNav> {
                     onPressed: null,
                     onIconPressed: () {},
                   ),
-                  Divider(
+                  const Divider(
                     height: 1,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: widget.sideNavItems.length,
                     itemBuilder: (context, index) => SideNavButton(
                       text: widget.sideNavItems[index]["name"],
@@ -73,7 +73,7 @@ class _SideNavState extends State<SideNav> {
                       onIconPressed: () {},
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   )
                 ],

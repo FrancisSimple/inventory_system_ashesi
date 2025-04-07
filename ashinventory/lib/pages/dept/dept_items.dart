@@ -352,7 +352,7 @@ class _DeptItemsState extends State<DeptItems> {
                       labelText: "Item name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -391,7 +391,7 @@ class _DeptItemsState extends State<DeptItems> {
                             // ),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: FormTextField(
                             controller: stockNumber,
@@ -538,7 +538,7 @@ class FixMeDataSource extends DataTableSource {
                                 filled: true,
                                 enabled: false,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -580,7 +580,7 @@ class FixMeDataSource extends DataTableSource {
                                       // ),
                                     ),
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Expanded(
                                     child: FormTextField(
                                       controller: itemNumber,
@@ -593,7 +593,7 @@ class FixMeDataSource extends DataTableSource {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               FormTextField(
                                 controller: note,
                                 maxLines: 5,
@@ -611,7 +611,7 @@ class FixMeDataSource extends DataTableSource {
                   },
                   child: const Text("Issue"),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 FilledButton(
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -649,7 +649,7 @@ class FixMeDataSource extends DataTableSource {
                                     .titleSmall
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               FormTextField(
                                 // controller: itemName,
                                 initialValue: request["name"],
@@ -658,7 +658,7 @@ class FixMeDataSource extends DataTableSource {
                                 labelText: "Item name",
                                 filled: true,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -671,7 +671,7 @@ class FixMeDataSource extends DataTableSource {
                                       filled: true,
                                     ),
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Expanded(
                                     child: FormTextField(
                                       controller: quantity,
@@ -685,7 +685,7 @@ class FixMeDataSource extends DataTableSource {
                                 ],
                               ),
                               // SizedBox(height: 16),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               FormTextField(
                                 controller: invoiceNumber,
                                 // maxLines: 5,
@@ -694,7 +694,7 @@ class FixMeDataSource extends DataTableSource {
                                 labelText: "Invoice number",
                                 filled: true,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Text(
                                 "Supplier details",
                                 style: Theme.of(context)
@@ -702,14 +702,14 @@ class FixMeDataSource extends DataTableSource {
                                     .titleSmall
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               FormTextField(
                                 controller: itemName,
                                 // hintText: "Item name",
                                 labelText: "Supplier name",
                                 filled: true,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               FormTextField(
                                 controller: itemName,
                                 // hintText: "Item name",
@@ -725,7 +725,7 @@ class FixMeDataSource extends DataTableSource {
                   },
                   child: const Text("Stock"),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 FilledButton(
                   style: ButtonStyle(
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(

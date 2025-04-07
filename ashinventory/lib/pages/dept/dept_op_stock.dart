@@ -81,7 +81,7 @@ class _DeptOpStockState extends State<DeptOpStock> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Row(
@@ -98,12 +98,12 @@ class _DeptOpStockState extends State<DeptOpStock> {
                           .titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold)),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             SelectionArea(

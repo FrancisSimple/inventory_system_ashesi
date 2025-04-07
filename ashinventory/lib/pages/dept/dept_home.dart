@@ -47,7 +47,7 @@ class _DashHomePageState extends State<DeptsPage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (MediaQuery.sizeOf(context).width > 760) ...[
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -56,7 +56,7 @@ class _DashHomePageState extends State<DeptsPage>
                     Text("${widget.title} supplies",
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Color(0xff433939),
+                                  color: const Color(0xff433939),
                                 )),
                   ],
                 ),
@@ -110,12 +110,12 @@ class _DashHomePageState extends State<DeptsPage>
                     onChanged: (value) {
                       setState(() {});
                     },
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                         minWidth: 100, maxWidth: 200, minHeight: 40),
                   ),
                 ),
               if (MediaQuery.sizeOf(context).width < 760)
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
               if (MediaQuery.sizeOf(context).width > 760) ...[
@@ -186,7 +186,7 @@ class _DashHomePageState extends State<DeptsPage>
                     onChanged: (value) {
                       setState(() {});
                     },
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                         minWidth: 100, maxWidth: 200, minHeight: 40),
                   ),
                 ),

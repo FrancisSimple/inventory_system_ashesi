@@ -55,9 +55,9 @@ class _MonthSelectorState extends State<MonthSelector> {
         Row(
           children: [
             IconButton.filled(
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               iconSize: 20,
-              style: ButtonStyle(
+              style: const ButtonStyle(
                 maximumSize: WidgetStatePropertyAll(Size(32, 32)),
                 minimumSize: WidgetStatePropertyAll(Size(32, 32)),
               ),
@@ -68,9 +68,9 @@ class _MonthSelectorState extends State<MonthSelector> {
               width: 4,
             ),
             IconButton.filled(
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               iconSize: 20,
-              style: ButtonStyle(
+              style: const ButtonStyle(
                 maximumSize: WidgetStatePropertyAll(Size(32, 32)),
                 minimumSize: WidgetStatePropertyAll(Size(32, 32)),
               ),

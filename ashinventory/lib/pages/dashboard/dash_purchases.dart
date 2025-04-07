@@ -106,7 +106,7 @@ class _DashPurchasesState extends State<DashPurchases> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -123,12 +123,12 @@ class _DashPurchasesState extends State<DashPurchases> {
                                 .titleLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   SelectionArea(
@@ -252,14 +252,14 @@ class _DashPurchasesState extends State<DashPurchases> {
                           .titleSmall
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     FormTextField(
                       controller: itemName,
                       // hintText: "Item name",
                       labelText: "Item name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -272,7 +272,7 @@ class _DashPurchasesState extends State<DashPurchases> {
                             filled: true,
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: FormTextField(
                             controller: quantity,
@@ -286,7 +286,7 @@ class _DashPurchasesState extends State<DashPurchases> {
                       ],
                     ),
                     // SizedBox(height: 16),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: invoiceNumber,
                       // maxLines: 5,
@@ -295,7 +295,7 @@ class _DashPurchasesState extends State<DashPurchases> {
                       labelText: "Invoice number",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       "Supplier details",
                       style: Theme.of(context)
@@ -303,14 +303,14 @@ class _DashPurchasesState extends State<DashPurchases> {
                           .titleSmall
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     FormTextField(
                       controller: supplierName,
                       // hintText: "Item name",
                       labelText: "Supplier name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: supplierContact,
                       // hintText: "Item name",

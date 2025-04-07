@@ -41,15 +41,15 @@ class ItemDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Last Updated: ${formattedDate}',
+              'Last Updated: $formattedDate',
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
             const Divider(),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Additional Notes:',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(

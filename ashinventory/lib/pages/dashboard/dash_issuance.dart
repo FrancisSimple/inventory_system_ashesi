@@ -207,14 +207,14 @@ class _DashIssuancesState extends State<DashIssuances> {
                       labelText: "Item name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: receipient,
                       // hintText: "Item name",
                       labelText: "Receipient",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -258,7 +258,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                             // ),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: FormTextField(
                             controller: itemNumber,
@@ -274,7 +274,7 @@ class _DashIssuancesState extends State<DashIssuances> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: note,
                       maxLines: 5,

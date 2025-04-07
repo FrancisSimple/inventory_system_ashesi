@@ -13,7 +13,7 @@ class SideNavButton extends StatelessWidget {
   final void Function()? onPressed;
   final void Function()? onIconPressed;
 
-  SideNavButton({
+  const SideNavButton({
     super.key,
     required this.text,
     this.sub = false,
@@ -50,11 +50,11 @@ class SideNavButton extends StatelessWidget {
               color: isActive
                   ? Theme.of(context).colorScheme.onPrimary
                   : sub
-                      ? Color(0xff433939)
+                      ? const Color(0xff433939)
                       : Theme.of(context).colorScheme.shadow),
         ),
         trailing: hasIcon || sub
-            ? Container(
+            ? SizedBox(
                 width: 32,
                 height: 24,
                 child: MaterialButton(

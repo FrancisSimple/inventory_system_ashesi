@@ -19,37 +19,37 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> sideNavItems = [
     {
       "name": "Engineering",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "Engineering",
       ),
     },
     {
       "name": "Hostels",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "Hostels",
       ),
     },
     {
       "name": "Health Center",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "Health Center",
       ),
     },
     {
       "name": "I.T.",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "I.T.",
       ),
     },
     {
       "name": "Business",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "Business",
       ),
     },
     {
       "name": "Library",
-      "page": DeptsPage(
+      "page": const DeptsPage(
         title: "Library",
       ),
     },
@@ -147,10 +147,10 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          Divider(
+                          const Divider(
                             height: 1,
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Column(
                             children: [
                               if (addDept)
@@ -178,10 +178,10 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 32,
                                         height: 24,
                                         child: MaterialButton(
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                                               });
                                             }
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.check,
                                             size: 16,
                                           ),
@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                   : ListView.builder(
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: sideNavItems.length,
                                       itemBuilder: (context, index) =>
                                           SideNavButton(
@@ -250,11 +250,11 @@ class _HomePageState extends State<HomePage> {
                                         onIconPressed: () {
                                           callDialog(
                                             context: context,
-                                            content: Container(
+                                            content: SizedBox(
                                               width: 0.5 *
                                                   MediaQuery.sizeOf(context)
                                                       .width,
-                                              child: Text(
+                                              child: const Text(
                                                   "Removing this department will remove all data associated with it."),
                                             ),
                                             title:
@@ -343,10 +343,10 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          Divider(
+                          const Divider(
                             height: 1,
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Column(
                             children: [
                               if (addDept)
@@ -374,10 +374,10 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 16,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 32,
                                         height: 24,
                                         child: MaterialButton(
@@ -413,7 +413,7 @@ class _HomePageState extends State<HomePage> {
                                               });
                                             }
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.check,
                                             size: 16,
                                           ),
@@ -423,14 +423,14 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               sideNavItems.isEmpty
-                                  ? MiniEmptyScreen(
+                                  ? const MiniEmptyScreen(
                                       title: "No departments available",
                                       subtitle:
                                           "Click the '+' button to add a new department",
                                     )
                                   : ListView.builder(
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: sideNavItems.length,
                                       itemBuilder: (context, index) =>
                                           SideNavButton(
@@ -446,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                                         onIconPressed: () {
                                           callDialog(
                                             context: context,
-                                            content: Text(
+                                            content: const Text(
                                                 "Removing this department will remove all data associated with it."),
                                             title:
                                                 "Delete ${sideNavItems[index]["name"]} department?",
@@ -477,7 +477,7 @@ class _HomePageState extends State<HomePage> {
           // Main Body
           Expanded(
             child: selectedTab == null
-                ? DashboardPage()
+                ? const DashboardPage()
                 : sideNavItems[selectedTab!]["page"],
           ),
         ],

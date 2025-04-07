@@ -29,7 +29,7 @@ class Post {
       id: id,
       name: "Test name",
       link: "Test link",
-      actions: FilledButton(onPressed: () {}, child: Text("data")),
+      actions: FilledButton(onPressed: () {}, child: const Text("data")),
       isEnabled: true,
       stockNumber: 500,
       // nameGender: Gender.values[2],
@@ -44,7 +44,7 @@ class Post {
 
   @override
   String toString() =>
-      "Post(id: $id, name: $name, link: ${link.length > 50 ? link.substring(0, 50) + '...' : link},  isEnabled: $isEnabled, stockNumber: $stockNumber, ";
+      "Post(id: $id, name: $name, link: ${link.length > 50 ? '${link.substring(0, 50)}...' : link},  isEnabled: $isEnabled, stockNumber: $stockNumber, ";
 }
 
 // enum Gender {

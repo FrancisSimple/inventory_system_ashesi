@@ -109,7 +109,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -126,12 +126,12 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                                 .titleLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   SelectionArea(
@@ -254,14 +254,14 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                           .titleSmall
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     FormTextField(
                       controller: itemName,
                       // hintText: "Item name",
                       labelText: "Item name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -274,7 +274,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                             filled: true,
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: FormTextField(
                             controller: quantity,
@@ -288,7 +288,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                       ],
                     ),
                     // SizedBox(height: 16),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: invoiceNumber,
                       // maxLines: 5,
@@ -297,7 +297,7 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                       labelText: "Invoice number",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       "Supplier details",
                       style: Theme.of(context)
@@ -305,14 +305,14 @@ class _DeptPurchasesState extends State<DeptPurchases> {
                           .titleSmall
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     FormTextField(
                       controller: supplierName,
                       // hintText: "Item name",
                       labelText: "Supplier name",
                       filled: true,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     FormTextField(
                       controller: supplierContact,
                       // hintText: "Item name",
