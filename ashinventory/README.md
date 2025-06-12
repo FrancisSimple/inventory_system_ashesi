@@ -162,15 +162,20 @@ AshInventory is an inventory management system built with Flutter. It provides d
 - Use the department-specific pages to manage items, purchases, and issuances relevant to your department.
 - Access the admin dashboard (if applicable) for a comprehensive overview and management options.
 
-## Contributing
 
-Contributions are welcome! Please follow these steps:
+## Packages Used
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add new feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Create a pull request.
+The following packages are used in this project as specified in [`pubspec.yaml`](pubspec.yaml):
 
-Please ensure your code follows the existing style and includes appropriate tests.
+### Main Dependencies
+
+- **flutter**: The core Flutter SDK for building cross-platform apps.
+- **cupertino_icons** (`^1.0.8`): iOS-style icons for use with the Cupertino widgets.
+- **paged_datatable** (`^2.1.1`): Provides paginated data tables for displaying large data sets efficiently.
+- **darq** (`^2.0.0`): Adds LINQ-style query extensions for Dart collections.
+- **intl** (`^0.19.0`): Internationalization and localization utilities, including date and number formatting.
+
+### Dev Dependencies
+
+- **flutter_test**: The Flutter testing framework for writing unit and widget tests.
+- **flutter_lints** (`^4.0.0`): Recommended lints and coding standards for Flutter projects.
