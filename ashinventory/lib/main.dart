@@ -1,7 +1,7 @@
 // import 'dart:math';
 
 // import 'package:ashinventory/pages/dashboard/dash_home.dart';
-import 'package:ashinventory/pages/authpage/loginpage.dart';
+import 'package:ashinventory/pages/auth/login.dart';
 import 'package:ashinventory/pages/home.dart';
 import 'package:ashinventory/themes/theme.dart';
 import 'package:flutter/material.dart';

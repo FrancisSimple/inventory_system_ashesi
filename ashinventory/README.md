@@ -36,8 +36,8 @@ AshInventory is an inventory management system built with Flutter. It provides d
   - **pages/**  
     *Main screens and navigation structure.*
 
-    - **authpage/**
-      - [`loginpage.dart`](lib/pages/authpage/loginpage.dart):  
+    - **auth/**
+      - [`login.dart`](lib/pages/auth/login.dart):  
         - Login screen for user authentication.
         - Contains a form for password entry, handles login logic, and navigates to the home page on success.
 
@@ -70,7 +70,7 @@ AshInventory is an inventory management system built with Flutter. It provides d
       - [`dept_issuance.dart`](lib/pages/dept/dept_issuance.dart):  
         - Shows a paginated table of item issuances for the department.
         - Allows adding new issuances and viewing issuance details.
-      - `dept_op_stock.dart`:  
+      - [`dept_op_stock.dart`](lib/pages/dept/dept_op_stock.dartdept_issuance.dart):  
         - (Assumed similar to dashboard's opening stock, but scoped to the department.)
       - [`dept_purchases.dart`](lib/pages/dept/dept_purchases.dart):  
         - Shows a paginated table of purchases for the department.
